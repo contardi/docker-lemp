@@ -49,16 +49,8 @@ RUN docker-php-ext-install bcmath \
     xsl \
     zip
 
-# PHP Imagick
-RUN pecl install imagick \ 
-    && docker-php-ext-enable imagick
-
-# PHP Memcache
-RUN pecl install memcached \
-    && docker-php-ext-enable memcached
-
 # PHP XDebug
-RUN pecl install xdebug \ 
+RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
@@ -67,6 +59,14 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_connect_back=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# PHP Imagick
+RUN pecl install imagick \
+    && docker-php-ext-enable imagick
+
+# PHP Memcache
+RUN pecl install memcached \
+    && docker-php-ext-enable memcached
 
 # PHP MongoDB
 RUN pecl install mongodb \
@@ -101,6 +101,14 @@ ENV GOPATH=/opt/go
 RUN mkdir /opt/go 
 RUN go get github.com/mailhog/mhsendmail \
     && echo "sendmail_path=\"/opt/go/bin/mhsendmail --smtp-addr='mailhog:1025'\"" > /usr/local/etc/php/conf.d/docker-php-ext-mailhog.ini
+
+# 775 and 664 folder permissions
+RUN echo "umask 0002" >> /etc/bash.bashrc
+
+# Fix current user permissions
+COPY fix-permissions.sh /tmp/fix-permissions.sh
+RUN chmod +x /tmp/fix-permissions.sh
+RUN /tmp/fix-permissions.sh
 
 # Cleaning
 RUN rm -rf /tmp/*

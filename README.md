@@ -11,3 +11,8 @@
 * Redis
 * PHPMyAdmin
 * ElasticSearch
+
+#### URLs
+**Nginx:** http://localhost/
+**PHPMyAdmin:** http://localhost:8080/
+**Mailhog:** http://localhost:8025/ 

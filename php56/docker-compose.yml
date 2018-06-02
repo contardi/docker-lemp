@@ -80,4 +80,8 @@ services:
       volumes:
         - ./var/www:/var/www
         - ./php/config/php.ini:/usr/local/etc/php/php.ini
-
+      environment:
+        - USERGID=1000
+        - USERUID=1000
+        - USERNAME=contardi
+        - TERM=xterm

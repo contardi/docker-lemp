@@ -49,14 +49,6 @@ RUN docker-php-ext-install bcmath \
     xsl \
     zip
 
-# PHP Imagick
-RUN pecl install imagick \ 
-    && docker-php-ext-enable memcached
-
-# PHP Memcache
-RUN pecl install memcached \ 
-    && docker-php-ext-enable memcached
-
 # PHP XDebug
 RUN pecl install xdebug-2.5.5 \
     && pecl channel-update pecl.php.net \
@@ -69,6 +61,14 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.remote_connect_back=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+# PHP Imagick
+RUN pecl install imagick \
+    && docker-php-ext-enable imagick
+
+# PHP Memcache
+RUN pecl install memcached-2.2.0 \
+    && docker-php-ext-enable memcached
+
 # PHP MongoDB
 RUN pecl install mongodb \
     && docker-php-ext-enable mongodb
@@ -76,7 +76,6 @@ RUN pecl install mongodb \
 # PHP OAuth
 RUN pecl install oauth-1.2.3 \
  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
-     
 
 # PHP Redis
 RUN pecl install --force redis \
@@ -114,6 +113,11 @@ RUN wget https://raw.githubusercontent.com/colinmollenhour/modman/master/modman 
 
 # 775 and 664 folder permissions
 RUN echo "umask 0002" >> /etc/bash.bashrc
+
+# Fix current user permissions
+COPY fix-permissions.sh /tmp/fix-permissions.sh
+RUN chmod +x /tmp/fix-permissions.sh
+RUN /tmp/fix-permissions.sh
 
 # Cleaning
 RUN rm -rf /tmp/*
