@@ -38,7 +38,6 @@ RUN docker-php-ext-install bcmath \
     calendar \
     gd \
     intl \
-    mcrypt \
     mysqli \
     opcache \
     pdo_mysql \
