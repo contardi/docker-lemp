@@ -39,6 +39,7 @@ RUN docker-php-ext-install bcmath \
     gd \
     intl \
     mcrypt \
+    mysql \
     mysqli \
     opcache \
     pdo_mysql \
@@ -103,21 +104,27 @@ RUN mkdir /opt/go
 RUN go get github.com/mailhog/mhsendmail \
     && echo "sendmail_path=\"/opt/go/bin/mhsendmail --smtp-addr='mailhog:1025'\"" > /usr/local/etc/php/conf.d/docker-php-ext-mailhog.ini
 
-# For Magento Servers; Magerun and Modman
+# For Magento Servers; Magerun and Modgit
 # Magerun
 RUN wget https://files.magerun.net/n98-magerun.phar --no-check-certificate \
     && chmod +x ./n98-magerun.phar \
     && mv ./n98-magerun.phar /usr/local/bin/
-# Modman
-RUN wget https://raw.githubusercontent.com/colinmollenhour/modman/master/modman -O /usr/local/bin/modman
+
+# Modgit
+RUN wget modgit https://raw.githubusercontent.com/jreinke/modgit/master/modgit -O \
+    && chmod +x modgit \
+    && mv modgit /usr/local/bin
 
 # 775 and 664 folder permissions
 RUN echo "umask 0002" >> /etc/bash.bashrc
 
 # Fix current user permissions
 COPY fix-permissions.sh /tmp/fix-permissions.sh
-RUN chmod +x /tmp/fix-permissions.sh
-RUN /tmp/fix-permissions.sh
+RUN chmod +x /tmp/fix-permissions.sh \
+    && /bin/bash /tmp/fix-permissions.sh
+
+RUN chown -R www-data: /var/www \
+    && chsh -s /bin/bash www-data
 
 # Cleaning
 RUN rm -rf /tmp/*

@@ -5,5 +5,3 @@ groupadd --gid ${USERGID} ${USERNAME}
 useradd --uid ${USERUID} --gid ${USERNAME} --shell /bin/bash --create-home ${USERNAME}
 usermod -aG www-data ${USERNAME}
 usermod -aG ${USERNAME} www-data
-chown -R www-data: /var/www
-chsh -s /bin/bash www-data
