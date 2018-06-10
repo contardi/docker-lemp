@@ -104,12 +104,14 @@ RUN mkdir /opt/go
 RUN go get github.com/mailhog/mhsendmail \
     && echo "sendmail_path=\"/opt/go/bin/mhsendmail --smtp-addr='mailhog:1025'\"" > /usr/local/etc/php/conf.d/docker-php-ext-mailhog.ini
 
-# For Magento Servers; Magerun and Modgit
+# For Magento Servers; Magerun Modman and Modgit
 # Magerun
 RUN wget https://files.magerun.net/n98-magerun.phar --no-check-certificate \
     && chmod +x ./n98-magerun.phar \
     && mv ./n98-magerun.phar /usr/local/bin/
-
+# Modman
+RUN wget https://raw.githubusercontent.com/colinmollenhour/modman/master/modman -O /usr/local/bin/modman \
+    && chmod +x /usr/local/bin/modman
 # Modgit
 RUN wget modgit https://raw.githubusercontent.com/jreinke/modgit/master/modgit -O \
     && chmod +x modgit \
