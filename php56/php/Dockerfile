@@ -121,10 +121,6 @@ RUN wget modgit https://raw.githubusercontent.com/jreinke/modgit/master/modgit -
 RUN echo "umask 0002" >> /etc/bash.bashrc
 
 # Fix current user permissions
-COPY fix-permissions.sh /tmp/fix-permissions.sh
-RUN chmod +x /tmp/fix-permissions.sh \
-    && /bin/bash /tmp/fix-permissions.sh
-
 RUN chown -R www-data: /var/www \
     && chsh -s /bin/bash www-data
 
