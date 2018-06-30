@@ -108,7 +108,7 @@ RUN go get github.com/mailhog/mhsendmail \
 # Magerun
 RUN wget https://files.magerun.net/n98-magerun.phar --no-check-certificate \
     && chmod +x ./n98-magerun.phar \
-    && mv ./n98-magerun.phar /usr/local/bin/
+    && mv ./n98-magerun.phar /usr/local/bin/magerun
 # Modman
 RUN wget https://raw.githubusercontent.com/colinmollenhour/modman/master/modman -O /usr/local/bin/modman \
     && chmod +x /usr/local/bin/modman
