@@ -1,5 +1,9 @@
 FROM php:7.1-fpm
 
+ARG USERGID
+ARG USERUID
+ARG USERNAME
+
 RUN apt-get update \ 
     && apt-get install -y imagemagick \ 
     vim \ 
@@ -109,6 +113,11 @@ RUN echo "umask 0002" >> /etc/bash.bashrc
 # Fix current user permissions
 RUN chown -R www-data: /var/www \
     && chsh -s /bin/bash www-data
+
+RUN groupadd --gid ${USERGID} ${USERNAME} \
+    && useradd --uid ${USERUID} --gid ${USERNAME} --shell /bin/bash --create-home ${USERNAME} \
+    && usermod -aG www-data ${USERNAME} \
+    && usermod -aG ${USERNAME} www-data
 
 # Cleaning
 RUN rm -rf /tmp/*

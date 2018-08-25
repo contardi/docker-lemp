@@ -74,14 +74,16 @@ services:
      - "80:80"
 
   php-fpm:
-    build: php
+    build:
+      context: php
+      args:
+      - USERGID=1000
+      - USERUID=1000
+      - USERNAME=contardi
     container_name: php72-fpm
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
     environment:
-      - USERGID=1000
-      - USERUID=1000
-      - USERNAME=contardi
       - TERM=xterm

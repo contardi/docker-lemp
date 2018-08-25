@@ -1,6 +1,9 @@
 #Docker LEMP + XDebug
 #### Just Another LEMP + XDebug Docker to Development
 
+You need to change the args into the docker-compose.yml files to your current user, UID and GID \
+That'll enabled you to change the files with the same permissions as www-data into the php server 
+
 * NGINX
 * PHP (5.6, 7.1, 7.2)
 * XDebug 
