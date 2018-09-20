@@ -24,6 +24,8 @@ services:
         - MYSQL_PASSWORD=password
       ports:
         - "3306:3306"
+      volumes:
+        - ./var/lib/mysql:/var/lib/mysql
 
     phpmyadmin:
       image: phpmyadmin/phpmyadmin:latest

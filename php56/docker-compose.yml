@@ -56,6 +56,8 @@ services:
       environment:
         - MONGO_USERNAME=root
         - MONGO_PASSWORD=password
+      volumes:
+        - ./var/lib/mysql:/var/lib/mysql
 
     elasticsearch:
       image: elasticsearch:5.4-alpine
