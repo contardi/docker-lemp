@@ -68,6 +68,10 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
 RUN pecl install imagick \
     && docker-php-ext-enable imagick
 
+# PHP MCrypt
+RUN pecl install mcrypt-1.0.1 \
+    && docker-php-ext-enable mcrypt
+
 # PHP Memcache
 RUN pecl install memcached \
     && docker-php-ext-enable memcached

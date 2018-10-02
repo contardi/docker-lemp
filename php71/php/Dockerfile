@@ -40,13 +40,15 @@ RUN docker-php-ext-configure \
 
 RUN docker-php-ext-install bcmath \
     calendar \
+    dom \
     gd \
     intl \
-    mbstring \
     mcrypt \
+    mbstring \
     mysqli \
     opcache \
     pdo_mysql \
+    simplexml \
     soap \
     sockets \
     xml \
