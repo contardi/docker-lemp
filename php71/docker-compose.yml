@@ -1,91 +1,111 @@
 version: "3"
 services:
-    memcached:
-      image: memcached:alpine
-      container_name: php71-memcached
+  memcached:
+    image: memcached:alpine
+    container_name: php71-memcached
 
-    mailhog:
-      image: mailhog/mailhog:latest
-      container_name: php71-mailhog
-      ports:
-        - "8025:8025"
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: php71-mailhog
+    ports:
+      - "8025:8025"
 
-    redis:
-      image: redis:alpine
-      container_name: php71-redis
+  redis:
+    image: redis:alpine
+    container_name: php71-redis
 
-    mariadb:
-      image: mariadb:latest
-      container_name: php71-mariadb
-      environment:
-        - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=app
-        - MYSQL_USER=user
-        - MYSQL_PASSWORD=password
-      ports:
-        - "3306:3306"
-      volumes:
-        - ./var/lib/mysql:/var/lib/mysql
+  mariadb:
+    image: mariadb:latest
+    container_name: php71-mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./var/lib/mysql:/var/lib/mysql
 
-    phpmyadmin:
-      image: phpmyadmin/phpmyadmin:latest
-      container_name: php71-phpmyadmin
-      links:
-        - mariadb:db
-      ports:
-        - 8080:80
-      environment:
-        - MYSQL_USERNAME=root
-        - MYSQL_ROOT_PASSWORD=root
-        - PMA_ARBITRARY=1
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: php71-phpmyadmin
+    links:
+      - mariadb:db
+    ports:
+      - 8080:80
+    environment:
+      - MYSQL_USERNAME=root
+      - MYSQL_ROOT_PASSWORD=root
+      - PMA_ARBITRARY=1
 
-#   Comment out if app created at var/app
-#    node:
-#      image: node:8
-#      container_name: php71-node
-#      volumes:
-#        - ./var/app:/var/app
-#      working_dir: /var/app
-#      command: ["npm", "start"]
-#      ports:
-#        - "3000:3000"
+#  Comment out if app created at var/app
+#  node:
+#    image: node:8
+#    container_name: php71-node
+#    volumes:
+#      - ./var/app:/var/app
+#    working_dir: /var/app
+#    command: ["npm", "start"]
+#    ports:
+#      - "3000:3000"
 
-    mongodb:
-      build: mongodb
-      container_name: php71-mongodb
-      ports:
-        - 27017:27017
-      environment:
-        - MONGO_USERNAME=root
-        - MONGO_PASSWORD=password
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: php71-rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "MYSECRETCOOKIE"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    volumes:
+    - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
 
-    elasticsearch:
-      image: elasticsearch:5.4-alpine
-      container_name: php71-elasticsearch
+  varnish:
+    build: varnish
+    container_name: php71-varnish
+    volumes:
+    - ./varnish/etc/varnish.vcl:/data/varnish.vcl
 
-    webserver:
-      image: nginx:alpine
-      container_name: php71-webserver
-      working_dir: /var/www
-      volumes:
-          - ./var/www:/var/www
-          - ./nginx/conf.d:/etc/nginx/conf.d
-      links:  
-        - php-fpm
-      ports:
-       - "80:80"
+  mongodb:
+    build: mongodb
+    container_name: php71-mongodb
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_USERNAME=root
+      - MONGO_PASSWORD=password
 
-    php-fpm:
-      build:
-        context: php
-        args:
-        - USERGID=1000
-        - USERUID=1000
-        - USERNAME=contardi
-      container_name: php71-fpm
-      working_dir: /var/www
-      volumes:
+  elasticsearch:
+    image: elasticsearch:5.4-alpine
+    container_name: php71-elasticsearch
+
+  webserver:
+    image: nginx:alpine
+    container_name: php71-webserver
+    working_dir: /var/www
+    volumes:
         - ./var/www:/var/www
-        - ./php/config/php.ini:/usr/local/etc/php/php.ini
-      environment:
-        - TERM=xterm
+        - ./nginx/conf.d:/etc/nginx/conf.d
+    links:
+      - php-fpm
+    ports:
+     - "80:80"
+
+  php-fpm:
+    build:
+      context: php
+      args:
+      - USERGID=1000
+      - USERUID=1000
+      - USERNAME=contardi
+    container_name: php71-fpm
+    working_dir: /var/www
+    volumes:
+      - ./var/www:/var/www
+      - ./php/config/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - TERM=xterm

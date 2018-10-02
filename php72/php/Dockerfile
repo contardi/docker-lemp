@@ -10,7 +10,6 @@ RUN apt-get update \
     curl \
     libmcrypt-dev \ 
     autoconf \
-    mbstring \
     g++ \
     libtool \
     libpng-dev \
@@ -43,13 +42,13 @@ RUN docker-php-ext-install bcmath \
     calendar \
     gd \
     intl \
+    mbstring \
     mysqli \
     opcache \
     pdo_mysql \
     soap \
     sockets \
     xml \
-    sqlite \
     xmlrpc \
     xsl \
     zip

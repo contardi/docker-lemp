@@ -50,6 +50,26 @@ services:
 #      ports:
 #        - "3000:3000"
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: php72-rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "MYSECRETCOOKIE"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    volumes:
+    - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+
+  varnish:
+    build: varnish
+    container_name: php72-varnish
+    volumes:
+    - ./varnish/etc/varnish.vcl:/data/varnish.vcl
+
   mongodb:
     build: mongodb
     container_name: php72-mongodb
