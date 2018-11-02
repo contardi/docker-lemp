@@ -33,6 +33,7 @@ RUN apt-get update \
     bash-completion \
     cron \
     gnupg \
+    zip \
     apt-utils
     
 RUN docker-php-ext-configure \

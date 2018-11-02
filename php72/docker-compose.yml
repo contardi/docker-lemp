@@ -64,12 +64,6 @@ services:
     volumes:
     - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
 
-  varnish:
-    build: varnish
-    container_name: php72-varnish
-    volumes:
-    - ./varnish/etc/varnish.vcl:/data/varnish.vcl
-
   mongodb:
     build: mongodb
     container_name: php72-mongodb
