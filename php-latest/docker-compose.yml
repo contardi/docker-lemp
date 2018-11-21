@@ -2,21 +2,21 @@ version: "3"
 services:
   memcached:
     image: memcached:alpine
-    container_name: php72-memcached
+    container_name: php-latest-memcached
 
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: php72-mailhog
+    container_name: php-latest-mailhog
     ports:
       - "8025:8025"
 
   redis:
     image: redis:alpine
-    container_name: php72-redis
+    container_name: php-latest-redis
 
   mariadb:
     image: mariadb:latest
-    container_name: php72-mariadb
+    container_name: php-latest-mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=app
@@ -25,11 +25,11 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./var/lib/mysql:/var/lib/mysql
+      - /var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: php72-phpmyadmin
+    container_name: php-latest-phpmyadmin
     links:
       - mariadb:db
     ports:
@@ -39,9 +39,20 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - PMA_ARBITRARY=1
 
+  node:
+    image: node:10
+    container_name: php71-node
+    user: "node"
+    volumes:
+      - ./var/app:/var/app
+    working_dir: /var/app
+    command: "true"
+    ports:
+      - "3000:3000"
+
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: php72-rabbitmq
+    container_name: php-latest-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: "MYSECRETCOOKIE"
       RABBITMQ_DEFAULT_USER: "rabbitmq"
@@ -55,7 +66,7 @@ services:
 
   mongodb:
     build: mongodb
-    container_name: php72-mongodb
+    container_name: php-latest-mongodb
     ports:
       - 27017:27017
     environment:
@@ -64,11 +75,11 @@ services:
 
   elasticsearch:
     image: elasticsearch:5.4-alpine
-    container_name: php72-elasticsearch
+    container_name: php-latest-elasticsearch
 
   webserver:
     image: nginx:alpine
-    container_name: php72-webserver
+    container_name: php-latest-webserver
     working_dir: /var/www
     volumes:
         - ./var/www:/var/www
@@ -85,7 +96,7 @@ services:
       - USERGID=1000
       - USERUID=1000
       - USERNAME=contardi
-    container_name: php72-fpm
+    container_name: php-latest-fpm
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www

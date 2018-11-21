@@ -39,17 +39,6 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - PMA_ARBITRARY=1
 
-#  Comment out if app created at var/app
-#  node:
-#    image: node:8
-#    container_name: php71-node
-#    volumes:
-#      - ./var/app:/var/app
-#    working_dir: /var/app
-#    command: ["npm", "start"]
-#    ports:
-#      - "3000:3000"
-
   rabbitmq:
     image: rabbitmq:3-management
     container_name: php71-rabbitmq
@@ -63,12 +52,6 @@ services:
     - "5672:5672"
     volumes:
     - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
-
-  varnish:
-    build: varnish
-    container_name: php71-varnish
-    volumes:
-    - ./varnish/etc/varnish.vcl:/data/varnish.vcl
 
   mongodb:
     build: mongodb
