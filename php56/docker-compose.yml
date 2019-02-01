@@ -24,6 +24,8 @@ services:
         - MYSQL_PASSWORD=password
       ports:
         - "3306:3306"
+      volumes:
+        - ./var/lib/mysql:/var/lib/mysql
 
     phpmyadmin:
       image: phpmyadmin/phpmyadmin:latest
@@ -38,15 +40,13 @@ services:
         - PMA_ARBITRARY=1
 
     mongodb:
-      build: mongodb
-      container_name: php56-mongodb
+      image: mongo:latest
+      container_name: php72-mongodb
       ports:
         - 27017:27017
       environment:
         - MONGO_USERNAME=root
-        - MONGO_PASSWORD=password
-      volumes:
-        - ./var/lib/mysql:/var/lib/mysql
+        - MONGO_PASSWORD=root
 
     elasticsearch:
       image: elasticsearch:5.4-alpine

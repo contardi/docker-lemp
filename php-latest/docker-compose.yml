@@ -65,13 +65,13 @@ services:
       - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
 
   mongodb:
-    build: mongodb
+    image: mongo:latest
     container_name: php-latest-mongodb
     ports:
       - 27017:27017
     environment:
       - MONGO_USERNAME=root
-      - MONGO_PASSWORD=password
+      - MONGO_PASSWORD=root
 
   elasticsearch:
     image: elasticsearch:5.4-alpine
