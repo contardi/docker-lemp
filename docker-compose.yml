@@ -2,21 +2,21 @@ version: "3"
 services:
   memcached:
     image: memcached:alpine
-    container_name: php-latest-memcached
+    container_name: lemp-memcached
 
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: php-latest-mailhog
+    container_name: lemp-mailhog
     ports:
       - "8025:8025"
 
   redis:
     image: redis:alpine
-    container_name: php-latest-redis
+    container_name: lemp-redis
 
   mariadb:
     image: mariadb:latest
-    container_name: php-latest-mariadb
+    container_name: lemp-mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=app
@@ -29,7 +29,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: php-latest-phpmyadmin
+    container_name: lemp-phpmyadmin
     links:
       - mariadb:db
     ports:
@@ -41,7 +41,7 @@ services:
 
   node:
     image: node:10
-    container_name: php71-node
+    container_name: lemp-node
     user: "node"
     volumes:
       - ./var/app:/var/app
@@ -52,7 +52,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: php-latest-rabbitmq
+    container_name: lemp-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: "MYSECRETCOOKIE"
       RABBITMQ_DEFAULT_USER: "rabbitmq"
@@ -66,7 +66,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: php-latest-mongodb
+    container_name: lemp-mongodb
     ports:
       - 27017:27017
     environment:
@@ -75,31 +75,46 @@ services:
 
   elasticsearch:
     image: elasticsearch:5.4-alpine
-    container_name: php-latest-elasticsearch
+    container_name: lemp-elasticsearch
 
   webserver:
     image: nginx:alpine
-    container_name: php-latest-webserver
+    container_name: lemp-webserver
     working_dir: /var/www
     volumes:
-        - ./var/www:/var/www
-        - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./var/www:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
     links:
       - php-fpm
     ports:
-     - "80:80"
+      - "80:80"
 
   php-fpm:
     build:
       context: php
       args:
-      - USERGID=1000
-      - USERUID=1000
-      - USERNAME=contardi
-    container_name: php-latest-fpm
+        - USERGID=1000
+        - USERUID=1000
+        - USERNAME=contardi
+    container_name: lemp-php
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - TERM=xterm
+
+  php56-fpm:
+    build:
+      context: php56
+      args:
+        - USERGID=1000
+        - USERUID=1000
+        - USERNAME=contardi
+    container_name: lemp-php56
+    working_dir: /var/www
+    volumes:
+      - ./var/www:/var/www
+      - ./php56/config/php.ini:/usr/local/etc/php/php.ini
     environment:
       - TERM=xterm
