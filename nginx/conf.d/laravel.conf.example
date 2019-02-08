@@ -1,0 +1,23 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/laravel.local/public;
+    index index.php;
+
+    server_name dev.laravel.local;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass php72-fpm:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PHP_VALUE "error_log=/var/log/nginx/php_errors.log";
+        fastcgi_buffers 16 16k;
+        fastcgi_buffer_size 32k;
+        include fastcgi_params;
+    }
+}

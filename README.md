@@ -26,6 +26,6 @@ That'll enabled you to change the files with the same permissions as www-data in
 
 #### Access PHP Servers
 PHP 5.6: `docker-compose exec php56-fpm bash` \
-PHP 7.2: `docker-compose exec php-fpm bash`
+PHP 7.2: `docker-compose exec php72-fpm bash`
 
 To change default variable edit `.env`  file 

@@ -66,7 +66,7 @@ services:
       - .env
 
   elasticsearch:
-    image: elasticsearch:5.4-alpine
+    image: elasticsearch:5-alpine
     container_name: lemp-elasticsearch
 
   webserver:
@@ -77,22 +77,23 @@ services:
       - ./var/www:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
     links:
-      - php-fpm
+      - php72-fpm
+      - php56-fpm
     ports:
       - "80:80"
 
-  php-fpm:
+  php72-fpm:
     build:
-      context: php
+      context: php72
       args:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-    container_name: lemp-php
+    container_name: lemp-php72
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
-      - ./php/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php72/config/php.ini:/usr/local/etc/php/php.ini
     env_file:
       - .env
     environment:

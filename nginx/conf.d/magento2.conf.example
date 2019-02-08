@@ -1,0 +1,21 @@
+upstream fastcgi_backend {
+   server   php72-fpm:9000;
+}
+
+server {
+    listen 80;
+
+    server_name dev.magento2.local;
+    set $MAGE_ROOT /var/www/dev.magento2.local; #don't forget to add the entry to your HOST machine
+    #set $MAGE_MODE developer;
+
+    fastcgi_connect_timeout 10s;
+    fastcgi_read_timeout 3600s;
+    fastcgi_send_timeout 60s;
+    fastcgi_buffer_size   128k;
+    fastcgi_buffers   4 256k;
+    fastcgi_busy_buffers_size   256k;
+    fastcgi_keep_conn on;
+
+    include /var/www/dev.magento2.local/nginx.conf.sample;
+}
