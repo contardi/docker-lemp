@@ -17,15 +17,12 @@ services:
   mariadb:
     image: mariadb:latest
     container_name: lemp-mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=app
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
     ports:
       - "3306:3306"
     volumes:
       - /var/lib/mysql
+    env_file:
+      - .env
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -34,44 +31,39 @@ services:
       - mariadb:db
     ports:
       - 8080:80
-    environment:
-      - MYSQL_USERNAME=root
-      - MYSQL_ROOT_PASSWORD=root
-      - PMA_ARBITRARY=1
+    env_file:
+      - .env
 
   node:
-    image: node:10
+    build:
+      context: node
     container_name: lemp-node
     user: "node"
     volumes:
-      - ./var/app:/var/app
-    working_dir: /var/app
-    command: "true"
+      - ./var/app:/usr/app
+    working_dir: /usr/app
+    command: "node app.js"
     ports:
       - "3000:3000"
 
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:management
     container_name: lemp-rabbitmq
-    environment:
-      RABBITMQ_ERLANG_COOKIE: "MYSECRETCOOKIE"
-      RABBITMQ_DEFAULT_USER: "rabbitmq"
-      RABBITMQ_DEFAULT_PASS: "rabbitmq"
-      RABBITMQ_DEFAULT_VHOST: "/"
     ports:
       - "15672:15672"
       - "5672:5672"
     volumes:
       - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+    env_file:
+      - .env
 
   mongodb:
     image: mongo:latest
     container_name: lemp-mongodb
     ports:
       - 27017:27017
-    environment:
-      - MONGO_USERNAME=root
-      - MONGO_PASSWORD=root
+    env_file:
+      - .env
 
   elasticsearch:
     image: elasticsearch:5.4-alpine
@@ -93,14 +85,16 @@ services:
     build:
       context: php
       args:
-        - USERGID=1000
-        - USERUID=1000
-        - USERNAME=contardi
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
     container_name: lemp-php
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
+    env_file:
+      - .env
     environment:
       - TERM=xterm
 
@@ -108,13 +102,15 @@ services:
     build:
       context: php56
       args:
-        - USERGID=1000
-        - USERUID=1000
-        - USERNAME=contardi
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
     container_name: lemp-php56
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
       - ./php56/config/php.ini:/usr/local/etc/php/php.ini
+    env_file:
+      - .env
     environment:
       - TERM=xterm

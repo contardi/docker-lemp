@@ -100,10 +100,10 @@ RUN composer global require "squizlabs/php_codesniffer=*" \
 RUN ln -s ~/.composer/vendor/bin/phpcs /usr/local/bin;
 ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
 
-# Node and Grunt
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+# Node and Yarn
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
   	&& apt-get install -y build-essential nodejs \
-    && npm i -g grunt-cli
+    && apt -y install --no-install-recommends yarn
 
 # Mailhog to send email
 ENV GOPATH=/opt/go
