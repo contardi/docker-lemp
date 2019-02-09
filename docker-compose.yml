@@ -1,74 +1,5 @@
 version: "3"
 services:
-  memcached:
-    image: memcached:alpine
-    container_name: lemp-memcached
-
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: lemp-mailhog
-    ports:
-      - "8025:8025"
-
-  redis:
-    image: redis:alpine
-    container_name: lemp-redis
-
-  mariadb:
-    image: mariadb:latest
-    container_name: lemp-mariadb
-    ports:
-      - "3306:3306"
-    volumes:
-      - /var/lib/mysql
-    env_file:
-      - .env
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: lemp-phpmyadmin
-    links:
-      - mariadb:db
-    ports:
-      - 8080:80
-    env_file:
-      - .env
-
-  node:
-    build:
-      context: node
-    container_name: lemp-node
-    user: "node"
-    volumes:
-      - ./var/app:/usr/app
-    working_dir: /usr/app
-    command: "node app.js"
-    ports:
-      - "3000:3000"
-
-  rabbitmq:
-    image: rabbitmq:management
-    container_name: lemp-rabbitmq
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-    volumes:
-      - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
-    env_file:
-      - .env
-
-  mongodb:
-    image: mongo:latest
-    container_name: lemp-mongodb
-    ports:
-      - 27017:27017
-    env_file:
-      - .env
-
-  elasticsearch:
-    image: elasticsearch:5-alpine
-    container_name: lemp-elasticsearch
-
   webserver:
     image: nginx:alpine
     container_name: lemp-webserver
@@ -77,10 +8,27 @@ services:
       - ./var/www:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
     links:
-      - php72-fpm
       - php56-fpm
+      - php72-fpm
     ports:
       - "80:80"
+
+  php56-fpm:
+    build:
+      context: php56
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+    container_name: lemp-php56
+    working_dir: /var/www
+    volumes:
+      - ./var/www:/var/www
+      - ./php56/config/php.ini:/usr/local/etc/php/php.ini
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
 
   php72-fpm:
     build:
@@ -99,19 +47,71 @@ services:
     environment:
       - TERM=xterm
 
-  php56-fpm:
-    build:
-      context: php56
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php56
-    working_dir: /var/www
+  mariadb:
+    image: mariadb:latest
+    container_name: lemp-mariadb
+    ports:
+      - "3306:3306"
     volumes:
-      - ./var/www:/var/www
-      - ./php56/config/php.ini:/usr/local/etc/php/php.ini
+      - ./var/lib/mysql:/var/lib/mysql
     env_file:
       - .env
-    environment:
-      - TERM=xterm
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: lemp-phpmyadmin
+    links:
+      - mariadb:db
+    ports:
+      - 8080:80
+    env_file:
+      - .env
+
+  memcached:
+    image: memcached:alpine
+    container_name: lemp-memcached
+
+  redis:
+    image: redis:alpine
+    container_name: lemp-redis
+
+  elasticsearch:
+    image: elasticsearch:5-alpine
+    container_name: lemp-elasticsearch
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: lemp-rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+    env_file:
+      - .env
+
+  node:
+    build:
+      context: node
+    container_name: lemp-node
+    user: "node"
+    volumes:
+      - ./var/app:/usr/app
+    working_dir: /usr/app
+    command: "node app.js"
+    ports:
+      - "3000:3000"
+
+  mongodb:
+    image: mongo:latest
+    container_name: lemp-mongodb
+    ports:
+      - 27017:27017
+    env_file:
+      - .env
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: lemp-mailhog
+    ports:
+      - "8025:8025"

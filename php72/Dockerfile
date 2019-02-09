@@ -124,8 +124,8 @@ RUN groupadd --gid ${USERGID} ${USERNAME} \
     && usermod -aG ${USERNAME} www-data
 
 RUN cd /var/www \
-    && find . -type d -exec chmod 770 {} \; \
-    && find . -type f -exec chmod 660 {} \;
+    && find . -type d -exec chmod 775 {} \; \
+    && find . -type f -exec chmod 664 {} \;
 
 # Cleaning
 RUN rm -rf /tmp/*
