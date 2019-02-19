@@ -78,6 +78,10 @@ services:
   elasticsearch:
     image: elasticsearch:5-alpine
     container_name: lemp-elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms400 -Xmx400m"
 
   rabbitmq:
     image: rabbitmq:management
