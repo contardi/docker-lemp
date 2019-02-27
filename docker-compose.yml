@@ -81,7 +81,7 @@ services:
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms400 -Xmx400m"
+      - "ES_JAVA_OPTS=-Xms400m -Xmx400m"
 
   rabbitmq:
     image: rabbitmq:management
