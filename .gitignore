@@ -1,2 +1,10 @@
 .idea
 .vscode
+/var/www/.bash_history
+/var/www/.composer
+/var/www/.env
+/var/www/.gitconfig
+/var/www/.selected_editor
+/var/www/.ssh
+/var/www/.viminfo
+/var/www/composer.json

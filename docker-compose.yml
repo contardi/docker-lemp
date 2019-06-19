@@ -7,11 +7,13 @@ services:
     volumes:
       - ./var/www:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certificates:/etc/nginx/certificates
     links:
       - php56-fpm
       - php72-fpm
     ports:
       - "80:80"
+      - "443:443"
 
   php56-fpm:
     build:
