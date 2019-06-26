@@ -58,6 +58,10 @@ RUN docker-php-ext-install bcmath \
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
+# PHP Sodium
+RUN pecl install -f libsodium \
+    && docker-php-ext-enable sodium
+
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
