@@ -4,6 +4,8 @@ ARG USERGID
 ARG USERUID
 ARG USERNAME
 
+RUN echo "deb http://deb.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
+
 RUN apt-get update \ 
     && apt-get install -y imagemagick \ 
     vim \ 
@@ -15,12 +17,10 @@ RUN apt-get update \
     libpng-dev \
     openssl \
     libxml2-dev \
-    libmemcached-dev \
     musl \
     make \
     libpcre3 \
     iproute2 \
-    libsodium-dev \
     libc-client-dev \
     libpcre3-dev \
     libxslt1-dev \
@@ -35,7 +35,9 @@ RUN apt-get update \
     gnupg \
     zip \
     apt-utils
-    
+
+RUN apt-get -t stretch-backports install -y libsodium-dev
+
 RUN docker-php-ext-configure \
   	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/;
     
@@ -48,6 +50,7 @@ RUN docker-php-ext-install bcmath \
     opcache \
     pdo_mysql \
     soap \
+    sodium \
     sockets \
     xml \
     xmlrpc \
@@ -58,9 +61,9 @@ RUN docker-php-ext-install bcmath \
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
-# PHP Sodium
-RUN pecl install -f libsodium \
-    && docker-php-ext-enable sodium
+RUN apt-get install -y libssh2-1-dev \
+  && pecl install ssh2-1.1.2 \
+  && docker-php-ext-enable ssh2
 
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \

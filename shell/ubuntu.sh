@@ -24,4 +24,3 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 #Prepare for Elasticsearch
 sudo sysctl -w vm.max_map_count=262144
-sudo sysctl -w fs.file-max=65535
