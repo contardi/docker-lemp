@@ -20,7 +20,7 @@ That'll enabled you to change the files with the same permissions as www-data in
 
 #### URLs
 **Nginx:** http://localhost/ - Folder var/www/ \
-**Node:** http://localhost:3000/ Folder var/app
+**Node:** http://localhost:3000/ Folder var/app \
 **PHPMyAdmin:** http://localhost:8080/ \
 **Mailhog:** http://localhost:8025/ \
 
@@ -33,4 +33,4 @@ PHP 7.2: `docker-compose exec php72-fpm bash`
 Node user: `docker-compose exec node bash`
 Root user: `docker-compose exec -u root node bash`
 
-To change default variable edit `.env`  file 
+To change default variables, edit `.env`  file 
