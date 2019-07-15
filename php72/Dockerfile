@@ -26,6 +26,7 @@ RUN apt-get update \
     libxslt1-dev \
     libmagickwand-dev \
     libmagickcore-dev \
+    libmemcached-dev \
     golang-go \
     wget \
     git \
@@ -73,23 +74,23 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.remote_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # PHP Imagick
-RUN pecl install imagick \
+RUN pecl install -f imagick \
     && docker-php-ext-enable imagick
 
 # PHP MCrypt
-RUN pecl install mcrypt-1.0.1 \
+RUN pecl install -f mcrypt-1.0.1 \
     && docker-php-ext-enable mcrypt
 
 # PHP Memcache
-RUN pecl install memcached \
+RUN pecl install -f memcached \
     && docker-php-ext-enable memcached
 
 # PHP MongoDB
-RUN pecl install mongodb \
+RUN pecl install -f mongodb \
     && docker-php-ext-enable mongodb
 
 # PHP OAuth
-RUN pecl install oauth \
+RUN pecl install -f oauth \
  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # PHP Redis

@@ -84,7 +84,7 @@ RUN pecl install oauth-1.2.3 \
  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # PHP Redis
-RUN pecl install --force redis \
+RUN pecl install --force redis-4.3.0 \
 	&& docker-php-ext-enable redis
 
 # Composer
