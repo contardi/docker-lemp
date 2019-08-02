@@ -77,6 +77,8 @@ services:
   redis:
     image: redis:alpine
     container_name: lemp-redis
+    depends_on:
+      - webserver
 
   elasticsearch:
     image: elasticsearch:6.8.1
