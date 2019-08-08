@@ -143,5 +143,3 @@ RUN rm -rf /tmp/*
 
 EXPOSE 9000
 CMD ["php-fpm"]
-
-ENTRYPOINT ["docker-entrypoint.sh"]
