@@ -35,7 +35,7 @@ RUN apt-get update \
     gnupg \
     zip \
     apt-utils
-    
+
 RUN docker-php-ext-configure \
   	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/;
 
@@ -52,8 +52,7 @@ RUN docker-php-ext-install bcmath \
     sockets \
     xml \
     xmlrpc \
-    xsl \
-    zip
+    xsl
 
 # PHP XDebug
 RUN pecl install xdebug-2.5.5 \
@@ -97,11 +96,6 @@ RUN composer global require "squizlabs/php_codesniffer=*" \
     && ~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor/magento-ecg/coding-standard
 RUN ln -s ~/.composer/vendor/bin/phpcs /usr/local/bin;
 ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
-
-# Node and Grunt
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-  	&& apt-get install -y build-essential nodejs \
-    && npm i -g grunt-cli
 
 # Mailhog to send email
 ENV GOPATH=/opt/go

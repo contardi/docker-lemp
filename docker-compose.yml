@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   webserver:
     image: nginx:alpine
@@ -10,7 +10,7 @@ services:
       - ./nginx/certificates:/etc/nginx/certificates
     links:
       - php56-fpm
-      - php72-fpm
+      - php73-fpm
       - mariadb
     ports:
       - "80:80"
@@ -33,18 +33,18 @@ services:
     environment:
       - TERM=xterm
 
-  php72-fpm:
+  php73-fpm:
     build:
-      context: php72
+      context: php73
       args:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-    container_name: lemp-php72
+    container_name: lemp-php73
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
-      - ./php72/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php73/config/php.ini:/usr/local/etc/php/php.ini
     env_file:
       - .env
     environment:
@@ -81,7 +81,7 @@ services:
       - webserver
 
   elasticsearch:
-    image: elasticsearch:6.8.1
+    image: elasticsearch:6.8.4
     container_name: lemp-elasticsearch
     environment:
       - discovery.type=single-node

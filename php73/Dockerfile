@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 ARG USERGID
 ARG USERUID
@@ -37,7 +37,7 @@ RUN apt-get update \
     zip \
     apt-utils
 
-RUN apt-get -t stretch-backports install -y libsodium-dev
+RUN apt-get install -y libsodium-dev
 
 RUN docker-php-ext-configure \
   	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/;
@@ -55,16 +55,11 @@ RUN docker-php-ext-install bcmath \
     sockets \
     xml \
     xmlrpc \
-    xsl \
-    zip
+    xsl
 
 # PHP XDebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
-
-RUN apt-get install -y libssh2-1-dev \
-  && pecl install ssh2-1.1.2 \
-  && docker-php-ext-enable ssh2
 
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
@@ -107,11 +102,6 @@ RUN composer global require "squizlabs/php_codesniffer=*" \
     && ~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor/magento-ecg/coding-standard
 RUN ln -s ~/.composer/vendor/bin/phpcs /usr/local/bin;
 ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
-
-# Node and Yarn
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-  	&& apt-get install -y build-essential nodejs \
-    && apt -y install --no-install-recommends yarn
 
 # Mailhog to send email
 ENV GOPATH=/opt/go
