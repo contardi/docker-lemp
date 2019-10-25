@@ -57,8 +57,6 @@ RUN docker-php-ext-install bcmath \
     xmlrpc \
     xsl
 
-RUN docker-php-ext-configure zip --with-libzip
-
 # PHP XDebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
@@ -93,6 +91,10 @@ RUN pecl install -f oauth \
 # PHP Redis
 RUN pecl install --force redis \
 	&& docker-php-ext-enable redis
+
+# PHP Zip
+RUN pecl install -f zip \
+    && echo "extension=zip.so" > /usr/local/etc/php/conf.d/docker-php-ext-zip.ini
 
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
