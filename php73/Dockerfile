@@ -27,6 +27,8 @@ RUN apt-get update \
     libmagickwand-dev \
     libmagickcore-dev \
     libmemcached-dev \
+    libsodium-dev z
+    libzip-dev \
     golang-go \
     wget \
     git \
@@ -36,8 +38,6 @@ RUN apt-get update \
     gnupg \
     zip \
     apt-utils
-
-RUN apt-get install -y libsodium-dev
 
 RUN docker-php-ext-configure \
   	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/;
@@ -56,6 +56,8 @@ RUN docker-php-ext-install bcmath \
     xml \
     xmlrpc \
     xsl
+
+RUN docker-php-ext-configure zip --with-libzip
 
 # PHP XDebug
 RUN pecl install xdebug \
