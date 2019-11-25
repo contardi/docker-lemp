@@ -27,7 +27,7 @@ RUN apt-get update \
     libmagickwand-dev \
     libmagickcore-dev \
     libmemcached-dev \
-    libsodium-dev z
+    libsodium-dev \
     libzip-dev \
     golang-go \
     wget \
