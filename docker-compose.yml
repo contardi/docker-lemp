@@ -107,6 +107,7 @@ services:
     user: "node"
     volumes:
       - ./var/app:/usr/app
+      - ./var/www:/var/www
     working_dir: /usr/app
     command: "node app.js"
     ports:

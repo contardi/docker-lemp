@@ -86,6 +86,10 @@ RUN pecl install oauth-1.2.3 \
 RUN pecl install --force redis-4.3.0 \
 	&& docker-php-ext-enable redis
 
+# Node and Yarn
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash - \
+    && apt-get install -y build-essential nodejs
+
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
