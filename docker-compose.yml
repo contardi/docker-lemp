@@ -99,7 +99,7 @@ services:
       - webserver
 
   elasticsearch:
-    image: elasticsearch:6.8.4
+    image: elasticsearch:7.6.2
     container_name: lemp-elasticsearch
     environment:
       - discovery.type=single-node
