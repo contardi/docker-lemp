@@ -1,13 +1,13 @@
 server {
     listen 80;
-    #listen 443 ssl http2;
+    listen 443 ssl http2;
 
     #openssl req -newkey rsa:2048 -nodes -keyout ./nginx/certificates/dev.magento2.local.key -x509 -days 365 -out ./nginx/certificates/dev.magento2.local.crt
-    #ssl_certificate     /etc/nginx/certificates/dev.magento2.local.crt;
-    #ssl_certificate_key /etc/nginx/certificates/dev.magento2.local.key;
+    ssl_certificate     /etc/nginx/certificates/magento2.local.crt;
+    ssl_certificate_key /etc/nginx/certificates/magento2.local.key;
 
-    server_name dev.magento2.local;
-    set $MAGE_ROOT /var/www/dev.magento2.local; #don't forget to add the entry to your HOST machine
+    server_name magento2.local;
+    set $MAGE_ROOT /var/www/magento2.local; #don't forget to add the entry to your HOST machine
     #set $MAGE_MODE developer;
 
     fastcgi_connect_timeout 10s;
@@ -18,5 +18,5 @@ server {
     fastcgi_busy_buffers_size   256k;
     fastcgi_keep_conn on;
 
-    include /var/www/dev.magento2.local/nginx.conf.sample;
+    include /var/www/magento2.local/nginx.conf.sample;
 }

@@ -92,10 +92,6 @@ RUN pecl install -f oauth \
 RUN pecl install -f redis \
 	&& docker-php-ext-enable redis
 
-# PHP Zip
-RUN pecl install -f zip \
-    && echo "extension=zip.so" > /usr/local/etc/php/conf.d/docker-php-ext-zip.ini
-
 # Node and Yarn
 RUN curl -sL https://deb.nodesource.com/setup_13.x | bash - \
     && apt-get install -y build-essential nodejs

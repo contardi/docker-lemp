@@ -15,3 +15,5 @@
 /nginx/conf.d/*.local.conf
 /nginx/certificates/*.local.crt
 /nginx/certificates/*.local.key
+/ssh-keys/id_rsa*
+/ssh-keys/known*

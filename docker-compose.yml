@@ -29,6 +29,7 @@ services:
     volumes:
       - ./var/www:/var/www
       - ./php56/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
     environment:
@@ -46,6 +47,7 @@ services:
     volumes:
       - ./var/www:/var/www
       - ./php73/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
     environment:
@@ -62,7 +64,8 @@ services:
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
-      - ./php74/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php74/config/php.ini:/usr/local/etc/php/php.
+      - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
     environment:
