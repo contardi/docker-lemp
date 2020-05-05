@@ -2,7 +2,7 @@ server {
     listen 80;
     listen 443 ssl http2;
 
-    #openssl req -newkey rsa:2048 -nodes -keyout ./nginx/certificates/dev.magento2.local.key -x509 -days 365 -out ./nginx/certificates/dev.magento2.local.crt
+    #openssl req -newkey rsa:2048 -nodes -keyout ./nginx/certificates/magento2.local.key -x509 -days 365 -out ./nginx/certificates/magento2.local.crt
     ssl_certificate     /etc/nginx/certificates/magento2.local.crt;
     ssl_certificate_key /etc/nginx/certificates/magento2.local.key;
 
