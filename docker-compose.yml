@@ -102,8 +102,11 @@ services:
       - webserver
 
   elasticsearch:
-    image: elasticsearch:7.6.2
+    build:
+      context: elasticsearch
     container_name: lemp-elasticsearch
+    ports:
+      - "9200:9200"
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
