@@ -72,12 +72,13 @@ services:
       - TERM=xterm
 
   mariadb:
-    image: mariadb:latest
+    image: mariadb/server:latest
     container_name: lemp-mariadb
     ports:
       - "3306:3306"
     volumes:
       - ./var/lib/mysql:/var/lib/mysql
+      - ./mariadb/conf.d/custom.cnf:/etc/mysql/conf.d/100-custom.cnf
     env_file:
       - .env
 
