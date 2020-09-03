@@ -74,10 +74,6 @@ RUN pecl install imagick \
 RUN pecl install memcached-2.2.0 \
     && docker-php-ext-enable memcached
 
-# PHP MongoDB
-RUN pecl install mongodb \
-    && docker-php-ext-enable mongodb
-
 # PHP OAuth
 RUN pecl install oauth-1.2.3 \
  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
