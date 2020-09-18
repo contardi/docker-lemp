@@ -52,7 +52,8 @@ RUN docker-php-ext-install bcmath \
     sockets \
     xml \
     xmlrpc \
-    xsl
+    xsl \
+    zip
 
 # PHP XDebug
 RUN pecl install xdebug-2.5.5 \
