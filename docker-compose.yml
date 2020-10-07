@@ -64,7 +64,7 @@ services:
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
-      - ./php74/config/php.ini:/usr/local/etc/php/php.
+      - ./php74/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
