@@ -3,7 +3,7 @@
 usage() {
   echo "Disable XDebug
   Usage
-  $ shell/disable-sdebug.sh {version}
+  $ shell/disable-xdebug.sh {version}
    * version: PHP Version, e.g. php73
   "
 }
