@@ -91,13 +91,6 @@ RUN curl -sL https://deb.nodesource.com/setup_13.x | bash - \
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Code Sniffer
-RUN composer global require "squizlabs/php_codesniffer=*" \
-    && composer global require magento-ecg/coding-standard \
-    && ~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor/magento-ecg/coding-standard
-RUN ln -s ~/.composer/vendor/bin/phpcs /usr/local/bin;
-ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
-
 # Mailhog to send email
 ENV GOPATH=/opt/go
 RUN mkdir /opt/go 
