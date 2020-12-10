@@ -6,6 +6,10 @@ ARG USERNAME
 
 RUN echo "deb http://deb.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
 
+#Yarn repository
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get update \ 
     && apt-get install -y imagemagick \ 
     vim \ 
@@ -96,6 +100,9 @@ RUN pecl install --force redis \
 # Node and Yarn
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y build-essential nodejs
+
+#Yarn
+RUN apt-get install -y yarn
 
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
