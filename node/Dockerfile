@@ -1,6 +1,3 @@
-FROM node:latest
+FROM node:lts
 
-WORKDIR /app
-COPY ./ /app
-
-RUN npm install express body-parser mongoose --save
+RUN yarn add express body-parser mongoose --save

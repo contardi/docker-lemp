@@ -84,7 +84,7 @@ RUN pecl install --force redis-4.3.0 \
 	&& docker-php-ext-enable redis
 
 # Node and Yarn
-RUN curl -sL https://deb.nodesource.com/setup_13.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y build-essential nodejs
 
 # Composer
