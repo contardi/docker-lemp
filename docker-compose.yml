@@ -71,7 +71,7 @@ services:
       - TERM=xterm
 
   mariadb:
-    image: mariadb/server:8.4
+    image: mariadb/server:10.4
     container_name: lemp-mariadb
     ports:
       - "3306:3306"

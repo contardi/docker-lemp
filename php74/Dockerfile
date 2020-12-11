@@ -58,7 +58,7 @@ RUN docker-php-ext-install bcmath \
     zip
 
 # PHP XDebug
-RUN pecl install xdebug \
+RUN pecl install xdebug-2.9.8 \
     && docker-php-ext-enable xdebug
 
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
