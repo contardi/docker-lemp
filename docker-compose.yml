@@ -10,7 +10,6 @@ services:
       - ./nginx/certificates:/etc/nginx/certificates
     links:
       - php56-fpm
-      - php73-fpm
       - php74-fpm
       - mariadb
     ports:
@@ -29,24 +28,6 @@ services:
     volumes:
       - ./var/www:/var/www
       - ./php56/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-
-  php73-fpm:
-    build:
-      context: php73
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php73
-    working_dir: /var/www
-    volumes:
-      - ./var/www:/var/www
-      - ./php73/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
