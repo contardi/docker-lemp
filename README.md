@@ -6,8 +6,8 @@ That'll enabled you to change the files with the same permissions as www-data in
 
 * NGINX
 * PHP 5.6
-* PHP 7.3
 * PHP 7.4
+* PHP 8 (latest)
 * MariaDB
 * PHPMyAdmin
 * Mongo
@@ -25,11 +25,10 @@ That'll enabled you to change the files with the same permissions as www-data in
 **PHPMyAdmin:** http://localhost:8080/ \
 **Mailhog:** http://localhost:8025/ \
 
-
 #### Access PHP Servers
 PHP 5.6: `docker-compose exec php56-fpm bash` \
-PHP 7.3: `docker-compose exec php73-fpm bash` \
-PHP 7.4: `docker-compose exec php74-fpm bash`
+PHP 7.4: `docker-compose exec php74-fpm bash` \
+PHP 8 (latest): `docker-compose exec php-fpm bash`
 
 #### Access Node Server
 Node user: `docker-compose exec node bash`  
