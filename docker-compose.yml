@@ -71,6 +71,24 @@ services:
     environment:
       - TERM=xterm
 
+  php-fpm:
+    build:
+      context: php
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+    container_name: lemp-php
+    working_dir: /var/www
+    volumes:
+      - ./var/www:/var/www
+      - ./php/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
+
   mariadb:
     image: mariadb/server:latest
     container_name: lemp-mariadb

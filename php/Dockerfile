@@ -1,14 +1,10 @@
-FROM php:7.3-fpm
+FROM php:fpm
 
 ARG USERGID
 ARG USERUID
 ARG USERNAME
 
 RUN echo "deb http://deb.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
-
-#Yarn repository
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 RUN apt-get update \ 
     && apt-get install -y imagemagick \ 
@@ -44,13 +40,12 @@ RUN apt-get update \
     apt-utils
 
 RUN docker-php-ext-configure \
-  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/;
+  	gd --with-freetype --with-jpeg;
     
 RUN docker-php-ext-install bcmath \
     calendar \
     gd \
     intl \
-    mbstring \
     mysqli \
     opcache \
     pdo_mysql \
@@ -58,7 +53,6 @@ RUN docker-php-ext-install bcmath \
     sodium \
     sockets \
     xml \
-    xmlrpc \
     xsl \
     zip
 
@@ -73,14 +67,6 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.remote_connect_back=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-# PHP Imagick
-RUN pecl install -f imagick \
-    && docker-php-ext-enable imagick
-
-# PHP MCrypt
-RUN pecl install -f mcrypt-1.0.1 \
-    && docker-php-ext-enable mcrypt
-
 # PHP Memcache
 RUN pecl install -f memcached \
     && docker-php-ext-enable memcached
@@ -94,7 +80,7 @@ RUN pecl install -f oauth \
  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # PHP Redis
-RUN pecl install --force redis \
+RUN pecl install -f redis \
 	&& docker-php-ext-enable redis
 
 # Node and Yarn
@@ -102,7 +88,10 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y build-essential nodejs
 
 #Yarn
-RUN apt-get install -y yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y yarn
 
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
