@@ -106,6 +106,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Code Sniffer
+RUN composer global require "squizlabs/php_codesniffer=*" \
+    && composer global require magento-ecg/coding-standard
+RUN ~/.config/composer/vendor/bin/phpcs --config-set installed_paths ~/.config/composer/vendor/magento-ecg/coding-standard
+RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
+
 # Mailhog to send email
 ENV GOPATH=/opt/go
 RUN mkdir /opt/go 
