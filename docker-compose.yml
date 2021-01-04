@@ -11,6 +11,7 @@ services:
     links:
       - php56-fpm
       - php74-fpm
+      - php-fpm
       - mariadb
     ports:
       - "80:80"
