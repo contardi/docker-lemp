@@ -41,6 +41,7 @@ RUN docker-php-ext-configure \
 
 RUN docker-php-ext-install bcmath \
     calendar \
+    curl \
     gd \
     intl \
     mcrypt \
