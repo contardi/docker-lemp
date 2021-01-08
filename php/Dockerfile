@@ -14,6 +14,7 @@ RUN apt-get update \
     autoconf \
     g++ \
     libtool \
+    libcurl4-openssl-dev \
     libpng-dev \
     openssl \
     libxml2-dev \
@@ -44,6 +45,7 @@ RUN docker-php-ext-configure \
     
 RUN docker-php-ext-install bcmath \
     calendar \
+    curl \
     gd \
     intl \
     mysqli \

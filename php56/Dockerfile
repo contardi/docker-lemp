@@ -22,6 +22,7 @@ RUN apt-get update \
     iproute2 \
     libsodium-dev \
     libc-client-dev \
+    libcurl4-openssl-dev \
     libpcre3-dev \
     libxslt1-dev \
     libmagickwand-dev \
@@ -41,6 +42,7 @@ RUN docker-php-ext-configure \
 
 RUN docker-php-ext-install bcmath \
     calendar \
+    curl \
     gd \
     intl \
     mcrypt \

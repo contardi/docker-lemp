@@ -10,11 +10,12 @@ RUN apt-get update \
     && apt-get install -y imagemagick \ 
     vim \ 
     curl \
-    libmcrypt-dev \ 
+    libmcrypt-dev \
     autoconf \
     g++ \
     libtool \
     libpng-dev \
+    libcurl4-openssl-dev \
     openssl \
     libxml2-dev \
     musl \
@@ -44,6 +45,7 @@ RUN docker-php-ext-configure \
     
 RUN docker-php-ext-install bcmath \
     calendar \
+    curl \
     gd \
     intl \
     mysqli \
