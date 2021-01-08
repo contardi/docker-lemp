@@ -93,6 +93,10 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Code Sniffer
+RUN composer global require "squizlabs/php_codesniffer=*"
+RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
+
 # Mailhog to send email
 ENV GOPATH=/opt/go
 RUN mkdir /opt/go 
