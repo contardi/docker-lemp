@@ -50,8 +50,10 @@ RUN docker-php-ext-install bcmath \
     mysqli \
     opcache \
     pdo_mysql \
+    simplexml \
     soap \
     sockets \
+    tokenizer \
     xml \
     xmlrpc \
     xsl \

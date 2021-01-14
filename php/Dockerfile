@@ -51,9 +51,11 @@ RUN docker-php-ext-install bcmath \
     mysqli \
     opcache \
     pdo_mysql \
+    simplexml \
     soap \
     sodium \
     sockets \
+    tokenizer \
     xml \
     xsl \
     zip
