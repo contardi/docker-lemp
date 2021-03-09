@@ -34,6 +34,7 @@ services:
       - .env
     environment:
       - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
 
   php74-fpm:
     build:
@@ -52,6 +53,7 @@ services:
       - .env
     environment:
       - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
 
   php-fpm:
     build:
@@ -70,6 +72,7 @@ services:
       - .env
     environment:
       - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
 
   mariadb:
     image: mariadb/server:10.4
