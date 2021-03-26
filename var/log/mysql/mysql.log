@@ -1,0 +1,1139 @@
+
+210326 18:04:46	   141 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   141 Query	SET SQL_MODE=''
+		   141 Query	SET NAMES utf8
+		   141 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   141 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   141 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   141 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('matinais', 'matinais/')) AND (store_id IN(0, 1))
+		   141 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:46' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:46' or date_to IS NULL)
+		   141 Query	SELECT `index_process`.* FROM `index_process` WHERE (`index_process`.`indexer_code`='catalog_category_flat')
+		   141 Query	SELECT `catalog_category_flat_store_1`.`entity_id` FROM `catalog_category_flat_store_1` LIMIT 1
+		   141 Query	SELECT `catalog_category_flat_store_1`.* FROM `catalog_category_flat_store_1` WHERE (`catalog_category_flat_store_1`.`entity_id`=310)
+		   141 Query	SELECT `main_table`.* FROM `catalog_category_flat_store_1` AS `main_table` WHERE (entity_id IN ('310', '2', '1')) AND (custom_use_parent_settings = 0) AND (`level` != 0) ORDER BY `level` DESC
+		   141 Query	SELECT COUNT(catalog_category_flat_store_1.entity_id) FROM `catalog_category_flat_store_1` WHERE (catalog_category_flat_store_1.path LIKE '1/2/310/%') AND (catalog_category_flat_store_1.is_active = 1)
+		   141 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:46')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:46')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:46'))
+		   141 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:46')
+		   141 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   141 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   141 Query	SELECT `main_table`.`entity_id`, `main_table`.`name`, `url_rewrite`.`request_path` FROM `catalog_category_flat_store_1` AS `main_table`
+ LEFT JOIN `core_url_rewrite` AS `url_rewrite` ON url_rewrite.category_id=main_table.entity_id AND url_rewrite.is_system=1 AND url_rewrite.store_id = 1 AND url_rewrite.id_path LIKE 'category/%' WHERE (main_table.entity_id IN ('310')) AND (main_table.is_active = '1') ORDER BY `main_table`.`path` ASC
+		   141 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (`core_url_rewrite`.`id_path`='category/310') AND (store_id = '1') ORDER BY `is_system` DESC LIMIT 1
+		   141 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='catalog_product')
+		   141 Query	SELECT `main_table`.*, IF(al.value IS NULL, main_table.frontend_label, al.value) AS `store_label` FROM `eav_attribute` AS `main_table`
+ INNER JOIN `catalog_eav_attribute` AS `additional_table` ON main_table.attribute_id = additional_table.attribute_id
+ LEFT JOIN `eav_attribute_label` AS `al` ON al.attribute_id = main_table.attribute_id AND al.store_id = 1 WHERE (main_table.entity_type_id = 4) AND (additional_table.used_for_sort_by = 1)
+		   141 Query	SELECT `index_process`.* FROM `index_process` WHERE (`index_process`.`indexer_code`='catalog_product_flat')
+		   141 Query	SELECT `core_flag`.* FROM `core_flag` WHERE (`core_flag`.`flag_code`='catalog_product_flat')
+210326 18:04:47	   141 Query	SELECT `main_table`.*, `additional_table`.*, IF(al.value IS NOT NULL, al.value, main_table.frontend_label) AS `store_label` FROM `eav_attribute` AS `main_table`
+ INNER JOIN `catalog_eav_attribute` AS `additional_table` ON main_table.attribute_id = additional_table.attribute_id
+ LEFT JOIN `eav_attribute_label` AS `al` ON al.attribute_id = main_table.attribute_id AND al.store_id = 1 WHERE (main_table.entity_type_id = 4) AND (additional_table.used_in_product_listing = 1)
+		   141 Query	SELECT DISTINCT `e`.`attribute_set_id` FROM `catalog_product_flat_1` AS `e`
+ INNER JOIN `catalog_category_product_index` AS `cat_index` ON cat_index.product_id=e.entity_id AND cat_index.store_id=1 AND cat_index.visibility IN(2, 4) AND cat_index.category_id = '310' AND cat_index.is_parent=1
+ INNER JOIN `catalog_product_index_price` AS `price_index` ON price_index.entity_id = e.entity_id AND price_index.website_id = '1' AND price_index.customer_group_id = 0 WHERE (e.status = 1)
+		   141 Query	SELECT `main_table`.`entity_type_id`, `main_table`.`attribute_code`, `main_table`.`attribute_model`, `main_table`.`backend_model`, `main_table`.`backend_type`, `main_table`.`backend_table`, `main_table`.`frontend_model`, `main_table`.`frontend_input`, `main_table`.`frontend_label`, `main_table`.`frontend_class`, `main_table`.`source_model`, `main_table`.`is_required`, `main_table`.`is_user_defined`, `main_table`.`default_value`, `main_table`.`is_unique`, `main_table`.`note`, `main_table`.`is_used_in`, `main_table`.`store_ids`, `main_table`.`is_required_by_pf`, `main_table`.`is_required_by_pj`, `additional_table`.*, `entity_attribute`.`attribute_id`, IFNULL(al.value, main_table.frontend_label) AS `store_label` FROM `eav_attribute` AS `main_table`
+ INNER JOIN `catalog_eav_attribute` AS `additional_table` ON additional_table.attribute_id = main_table.attribute_id
+ INNER JOIN `eav_entity_attribute` AS `entity_attribute` ON entity_attribute.attribute_id = main_table.attribute_id
+ LEFT JOIN `eav_attribute_label` AS `al` ON al.attribute_id = main_table.attribute_id AND al.store_id = 1 WHERE (main_table.entity_type_id = 4) AND (`entity_attribute`.`attribute_set_id` IN('4')) AND (`additional_table`.`is_filterable` > 0) GROUP BY `entity_attribute`.`attribute_id` ORDER BY position ASC
+		   141 Query	SELECT `main_table`.*, `tdv`.`value` AS `default_value`, `tsv`.`value` AS `store_default_value`, IF(tsv.value_id > 0, tsv.value, tdv.value) AS `value` FROM `eav_attribute_option` AS `main_table`
+ INNER JOIN `eav_attribute_option_value` AS `tdv` ON tdv.option_id = main_table.option_id
+ LEFT JOIN `eav_attribute_option_value` AS `tsv` ON tsv.option_id = main_table.option_id AND tsv.store_id = '1' WHERE (`attribute_id` = '133') AND (tdv.store_id = 0) ORDER BY main_table.sort_order ASC, value ASC
+		   141 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   141 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   141 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   141 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   141 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='catalog_category')
+		   141 Query	SELECT `eav_attribute`.* FROM `eav_attribute` WHERE (`eav_attribute`.`attribute_code`='image') AND (entity_type_id = '3')
+		   141 Query	SELECT `eav_entity_type`.`additional_attribute_table` FROM `eav_entity_type` WHERE (entity_type_id = '3')
+		   141 Query	SELECT `catalog_eav_attribute`.* FROM `catalog_eav_attribute` WHERE (attribute_id = '45')
+		   141 Query	SELECT `eav_attribute`.* FROM `eav_attribute` WHERE (`eav_attribute`.`attribute_code`='name') AND (entity_type_id = '3')
+		   141 Query	SELECT `eav_entity_type`.`additional_attribute_table` FROM `eav_entity_type` WHERE (entity_type_id = '3')
+		   141 Query	SELECT `catalog_eav_attribute`.* FROM `catalog_eav_attribute` WHERE (attribute_id = '41')
+		   141 Query	SELECT `eav_attribute`.* FROM `eav_attribute` WHERE (`eav_attribute`.`attribute_code`='description') AND (entity_type_id = '3')
+		   141 Query	SELECT `eav_entity_type`.`additional_attribute_table` FROM `eav_entity_type` WHERE (entity_type_id = '3')
+		   141 Query	SELECT `catalog_eav_attribute`.* FROM `catalog_eav_attribute` WHERE (attribute_id = '44')
+		   141 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   141 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   141 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   141 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   141 Query	SELECT `catalog_category_flat_store_1`.`entity_id` FROM `catalog_category_flat_store_1` WHERE (entity_id='2')
+		   141 Query	SELECT `catalog_category_flat_store_1`.* FROM `catalog_category_flat_store_1` WHERE (entity_id = '2')
+		   141 Query	SELECT `main_table`.`entity_id`, main_table.`name`, main_table.`path`, `main_table`.`is_active`, `main_table`.`is_anchor`, `url_rewrite`.`request_path` FROM `catalog_category_flat_store_1` AS `main_table`
+ LEFT JOIN `core_url_rewrite` AS `url_rewrite` ON url_rewrite.category_id=main_table.entity_id AND url_rewrite.is_system=1 AND url_rewrite.store_id = 1 AND url_rewrite.id_path LIKE 'category/%' WHERE (main_table.include_in_menu = '1') AND (main_table.is_active = '1') AND (main_table.path like '1/2/%') AND (`level` <= 4) ORDER BY `main_table`.`position` ASC
+		   141 Query	SELECT `catalog_category_flat_store_1`.* FROM `catalog_category_flat_store_1` WHERE (`catalog_category_flat_store_1`.`entity_id`='310')
+		   141 Query	SELECT COUNT(catalog_category_flat_store_1.entity_id) FROM `catalog_category_flat_store_1` WHERE (catalog_category_flat_store_1.path LIKE '1/2/310/%') AND (catalog_category_flat_store_1.is_active = 1)
+		   141 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (`core_url_rewrite`.`id_path`='category/310') AND (store_id = '1') ORDER BY `is_system` DESC LIMIT 1
+		   141 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   141 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   141 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   141 Quit	
+		   142 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   142 Query	SET SQL_MODE=''
+		   142 Query	SET NAMES utf8
+		   142 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   142 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   142 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   143 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   143 Query	SET SQL_MODE=''
+		   143 Query	SET NAMES utf8
+		   143 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   143 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   143 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   144 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   144 Query	SET SQL_MODE=''
+		   144 Query	SET NAMES utf8
+		   144 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   144 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   144 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   142 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820469.png', 'media/custom/pagtos/pagtos-1533820469.png/')) AND (store_id IN(0, 1))
+		   142 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820469.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   142 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:47' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:47' or date_to IS NULL)
+		   143 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820507.png', 'media/custom/pagtos/pagtos-1533820507.png/')) AND (store_id IN(0, 1))
+		   144 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820529.png', 'media/custom/pagtos/pagtos-1533820529.png/')) AND (store_id IN(0, 1))
+		   143 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820507.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   144 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820529.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   142 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   142 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   142 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:47')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:47')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:47'))
+		   142 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:47')
+		   142 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   142 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   142 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   142 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   142 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   142 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   142 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   142 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   142 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   142 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   142 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   142 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   142 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   142 Quit	
+		   145 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   145 Query	SET SQL_MODE=''
+		   145 Query	SET NAMES utf8
+		   145 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   145 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   145 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   144 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:47' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:47' or date_to IS NULL)
+		   145 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820682.png', 'media/custom/pagtos/pagtos-1533820682.png/')) AND (store_id IN(0, 1))
+		   144 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   144 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   145 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820682.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   144 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:47')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:47')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:47'))
+210326 18:04:48	   144 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:48')
+		   144 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   144 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   146 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   146 Query	SET SQL_MODE=''
+		   146 Query	SET NAMES utf8
+		   146 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   146 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   146 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   146 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820699.png', 'media/custom/pagtos/pagtos-1533820699.png/')) AND (store_id IN(0, 1))
+		   146 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820699.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   144 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   144 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   144 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   144 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   144 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   144 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   144 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   144 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   144 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   144 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   144 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   144 Quit	
+		   147 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   147 Query	SET SQL_MODE=''
+		   147 Query	SET NAMES utf8
+		   147 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   147 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   147 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   147 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820715.png', 'media/custom/pagtos/pagtos-1533820715.png/')) AND (store_id IN(0, 1))
+		   147 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820715.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   143 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:48' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:48' or date_to IS NULL)
+		   143 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   143 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   143 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:48')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:48')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:48'))
+		   143 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:48')
+		   143 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   143 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   143 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   143 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   143 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   143 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   143 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   143 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   143 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   143 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   143 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   143 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   143 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   143 Quit	
+		   145 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:48' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:48' or date_to IS NULL)
+		   148 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   148 Query	SET SQL_MODE=''
+		   148 Query	SET NAMES utf8
+		   148 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   148 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   148 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   145 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   145 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   145 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:48')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:48')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:48'))
+		   148 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820787.png', 'media/custom/pagtos/pagtos-1533820787.png/')) AND (store_id IN(0, 1))
+		   148 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820787.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   145 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:48')
+		   145 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   145 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   145 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   145 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   145 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   145 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   145 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   145 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   145 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   145 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   145 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+210326 18:04:49	   145 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   145 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   145 Quit	
+		   146 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:49' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:49' or date_to IS NULL)
+		   149 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   149 Query	SET SQL_MODE=''
+		   149 Query	SET NAMES utf8
+		   149 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   149 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   149 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   146 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   146 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   149 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820804.png', 'media/custom/pagtos/pagtos-1533820804.png/')) AND (store_id IN(0, 1))
+		   150 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   150 Query	SET SQL_MODE=''
+		   150 Query	SET NAMES utf8
+		   150 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   150 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   150 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   149 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820804.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   146 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:49')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:49')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:49'))
+		   150 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820819.png', 'media/custom/pagtos/pagtos-1533820819.png/')) AND (store_id IN(0, 1))
+		   150 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820819.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   146 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:49')
+		   146 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   146 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   146 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   146 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   146 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   146 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   146 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   146 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   146 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   146 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   146 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   146 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   146 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   146 Quit	
+		   151 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   151 Query	SET SQL_MODE=''
+		   151 Query	SET NAMES utf8
+		   151 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   151 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   151 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   148 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:49' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:49' or date_to IS NULL)
+		   151 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820991.png', 'media/custom/pagtos/pagtos-1533820991.png/')) AND (store_id IN(0, 1))
+		   151 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820991.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   148 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   148 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   148 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:49')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:49')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:49'))
+		   148 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:49')
+		   148 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   148 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   148 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   148 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   148 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   148 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   148 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   148 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   148 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   148 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   148 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   148 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   148 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   148 Quit	
+		   152 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   152 Query	SET SQL_MODE=''
+		   152 Query	SET NAMES utf8
+		   152 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   152 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   152 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   149 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:49' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:49' or date_to IS NULL)
+		   152 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820434.png', 'media/custom/pagtos/pagtos-1533820434.png/')) AND (store_id IN(0, 1))
+		   152 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820434.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   149 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   149 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   149 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:49')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:49')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:49'))
+		   149 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:49')
+		   149 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   149 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   149 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   149 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   149 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   149 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   149 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   149 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   149 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   149 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   149 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   149 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   149 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+210326 18:04:50	   149 Quit	
+		   151 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:50' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:50' or date_to IS NULL)
+		   153 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   153 Query	SET SQL_MODE=''
+		   153 Query	SET NAMES utf8
+		   153 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   153 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   153 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   151 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   151 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   153 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820762.png', 'media/custom/pagtos/pagtos-1533820762.png/')) AND (store_id IN(0, 1))
+		   151 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:50')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:50')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:50'))
+		   153 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820762.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   151 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:50')
+		   151 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   151 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   151 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   151 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   151 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   151 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   151 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   151 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   151 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   151 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   151 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   151 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   151 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   151 Quit	
+		   147 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:50' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:50' or date_to IS NULL)
+		   154 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   154 Query	SET SQL_MODE=''
+		   154 Query	SET NAMES utf8
+		   154 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   154 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   154 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   147 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   147 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   154 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820872.png', 'media/custom/pagtos/pagtos-1533820872.png/')) AND (store_id IN(0, 1))
+		   154 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820872.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   147 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:50')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:50')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:50'))
+		   147 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:50')
+		   147 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   147 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   147 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   147 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   147 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   147 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   147 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   147 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   147 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   147 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   147 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   147 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   147 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   147 Quit	
+		   150 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:50' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:50' or date_to IS NULL)
+		   155 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   155 Query	SET SQL_MODE=''
+		   155 Query	SET NAMES utf8
+		   155 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   155 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   155 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   150 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   150 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   150 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:50')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:50')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:50'))
+		   155 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820901.png', 'media/custom/pagtos/pagtos-1533820901.png/')) AND (store_id IN(0, 1))
+		   155 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820901.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   150 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:50')
+		   150 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   150 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   150 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   150 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   150 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   150 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   150 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   150 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   150 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   150 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   150 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   150 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   150 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   150 Quit	
+		   152 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:50' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:50' or date_to IS NULL)
+		   156 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   156 Query	SET SQL_MODE=''
+		   156 Query	SET NAMES utf8
+		   156 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   156 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   156 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+210326 18:04:51	   152 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   152 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   156 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820920.png', 'media/custom/pagtos/pagtos-1533820920.png/')) AND (store_id IN(0, 1))
+		   156 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820920.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   152 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:51')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:51')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:51'))
+		   152 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:51')
+		   152 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   152 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   152 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   152 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   152 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   152 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   152 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   152 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   152 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   152 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   152 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   152 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   152 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   152 Quit	
+		   153 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:51' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:51' or date_to IS NULL)
+		   157 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   157 Query	SET SQL_MODE=''
+		   157 Query	SET NAMES utf8
+		   157 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   157 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   157 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   153 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   153 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   157 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820974.png', 'media/custom/pagtos/pagtos-1533820974.png/')) AND (store_id IN(0, 1))
+		   153 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:51')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:51')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:51'))
+		   157 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820974.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   153 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:51')
+		   153 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   153 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   153 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   153 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   153 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   153 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   153 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   153 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   153 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   153 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   153 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   153 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   153 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   153 Quit	
+		   158 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   158 Query	SET SQL_MODE=''
+		   158 Query	SET NAMES utf8
+		   158 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   158 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   158 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   154 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:51' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:51' or date_to IS NULL)
+		   158 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533821021.png', 'media/custom/pagtos/pagtos-1533821021.png/')) AND (store_id IN(0, 1))
+		   154 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   154 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   158 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533821021.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   154 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:51')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:51')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:51'))
+		   154 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:51')
+		   154 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   154 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   154 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   154 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   154 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   154 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   154 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   154 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   154 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   154 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   154 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   154 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   154 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   154 Quit	
+210326 18:04:52	   159 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   159 Query	SET SQL_MODE=''
+		   159 Query	SET NAMES utf8
+		   159 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   159 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   159 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   159 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('bizrest/action/customer', 'bizrest/action/customer/')) AND (store_id IN(0, 1))
+		   159 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:52' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:52' or date_to IS NULL)
+		   159 Quit	
+		   160 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   160 Query	SET SQL_MODE=''
+		   160 Query	SET NAMES utf8
+		   160 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   160 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   160 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   160 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('bizrest/action/cart', 'bizrest/action/cart/')) AND (store_id IN(0, 1))
+		   160 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:52' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:52' or date_to IS NULL)
+		   160 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   160 Quit	
+		   158 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:52' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:52' or date_to IS NULL)
+		   161 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   161 Query	SET SQL_MODE=''
+		   161 Query	SET NAMES utf8
+		   161 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   161 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   161 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   158 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   158 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   158 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:52')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:52')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:52'))
+		   161 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820469.png', 'media/custom/pagtos/pagtos-1533820469.png/')) AND (store_id IN(0, 1))
+		   161 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820469.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   158 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:52')
+		   158 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   158 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   158 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   158 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   158 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   158 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   158 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   158 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   158 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   158 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   158 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   158 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   158 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   158 Quit	
+		   162 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   162 Query	SET SQL_MODE=''
+		   162 Query	SET NAMES utf8
+		   161 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:52' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:52' or date_to IS NULL)
+		   162 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   162 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   162 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   161 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   161 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   162 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820507.png', 'media/custom/pagtos/pagtos-1533820507.png/')) AND (store_id IN(0, 1))
+		   162 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820507.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   161 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:52')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:52')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:52'))
+		   161 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:52')
+		   161 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   161 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   161 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   161 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   161 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   161 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   161 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   161 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   161 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   161 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   161 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   161 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   161 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   161 Quit	
+		   163 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   163 Query	SET SQL_MODE=''
+		   163 Query	SET NAMES utf8
+		   163 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   163 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   155 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:52' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:52' or date_to IS NULL)
+		   163 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   155 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   163 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820529.png', 'media/custom/pagtos/pagtos-1533820529.png/')) AND (store_id IN(0, 1))
+		   155 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   163 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820529.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+210326 18:04:53	   155 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:53')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:53')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:53'))
+		   155 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:53')
+		   155 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   155 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   155 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   155 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   155 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   155 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   155 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   155 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   155 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   155 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   155 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   155 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   155 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   155 Quit	
+		   156 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:53' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:53' or date_to IS NULL)
+		   164 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   164 Query	SET SQL_MODE=''
+		   164 Query	SET NAMES utf8
+		   164 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   164 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   164 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   156 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   156 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   156 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:53')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:53')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:53'))
+		   164 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820682.png', 'media/custom/pagtos/pagtos-1533820682.png/')) AND (store_id IN(0, 1))
+		   164 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820682.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   156 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:53')
+		   156 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   156 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   156 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   156 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   156 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   156 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   156 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   156 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   156 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   156 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   156 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   156 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   156 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   156 Quit	
+		   162 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:53' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:53' or date_to IS NULL)
+		   165 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   165 Query	SET SQL_MODE=''
+		   165 Query	SET NAMES utf8
+		   165 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   165 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   165 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   162 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   162 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   165 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820699.png', 'media/custom/pagtos/pagtos-1533820699.png/')) AND (store_id IN(0, 1))
+		   165 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820699.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   162 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:53')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:53')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:53'))
+		   162 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:53')
+		   162 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   162 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   162 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   162 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   162 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   162 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   162 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   162 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   162 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   162 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   162 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   162 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   162 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   162 Quit	
+		   166 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   166 Query	SET SQL_MODE=''
+		   166 Query	SET NAMES utf8
+		   166 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   166 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   166 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   157 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:53' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:53' or date_to IS NULL)
+		   166 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820715.png', 'media/custom/pagtos/pagtos-1533820715.png/')) AND (store_id IN(0, 1))
+		   157 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   166 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820715.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   157 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   157 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:53')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:53')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:53'))
+		   157 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:53')
+		   157 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   157 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+210326 18:04:54	   157 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   157 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   157 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   157 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   157 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   157 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   157 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   157 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   157 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   157 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   157 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   157 Quit	
+		   163 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:54' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:54' or date_to IS NULL)
+		   167 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   167 Query	SET SQL_MODE=''
+		   167 Query	SET NAMES utf8
+		   167 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   167 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   167 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   163 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   163 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   163 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:54')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:54')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:54'))
+		   167 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820787.png', 'media/custom/pagtos/pagtos-1533820787.png/')) AND (store_id IN(0, 1))
+		   167 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820787.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   163 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:54')
+		   163 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   163 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   163 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   163 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   163 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   163 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   163 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   163 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   163 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   163 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   163 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   163 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   163 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   163 Quit	
+		   168 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   168 Query	SET SQL_MODE=''
+		   168 Query	SET NAMES utf8
+		   168 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   168 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   166 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:54' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:54' or date_to IS NULL)
+		   168 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   166 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   166 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   168 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820804.png', 'media/custom/pagtos/pagtos-1533820804.png/')) AND (store_id IN(0, 1))
+		   168 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820804.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   166 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:54')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:54')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:54'))
+		   166 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:54')
+		   166 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   166 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   166 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   166 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   166 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   166 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   166 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   166 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   166 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   166 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   166 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   166 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   166 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   166 Quit	
+		   169 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   169 Query	SET SQL_MODE=''
+		   169 Query	SET NAMES utf8
+		   169 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   169 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   169 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   164 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:54' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:54' or date_to IS NULL)
+		   169 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820819.png', 'media/custom/pagtos/pagtos-1533820819.png/')) AND (store_id IN(0, 1))
+		   169 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820819.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   164 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   164 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   164 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:54')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:54')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:54'))
+		   164 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:54')
+		   164 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   164 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   164 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+210326 18:04:55	   164 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   164 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   164 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   164 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   164 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   164 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   164 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   164 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   164 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   164 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   164 Quit	
+		   170 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   170 Query	SET SQL_MODE=''
+		   170 Query	SET NAMES utf8
+		   170 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   170 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   170 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   165 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:55' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:55' or date_to IS NULL)
+		   170 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820991.png', 'media/custom/pagtos/pagtos-1533820991.png/')) AND (store_id IN(0, 1))
+		   170 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820991.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   165 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   165 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   165 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:55')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:55')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:55'))
+		   165 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:55')
+		   165 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   165 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   165 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   165 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   165 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   165 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   165 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   165 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   165 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   165 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   165 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   165 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   165 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   165 Quit	
+		   171 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   171 Query	SET SQL_MODE=''
+		   171 Query	SET NAMES utf8
+		   171 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   171 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   171 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   170 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:55' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:55' or date_to IS NULL)
+		   171 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820434.png', 'media/custom/pagtos/pagtos-1533820434.png/')) AND (store_id IN(0, 1))
+		   171 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820434.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   170 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   170 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   170 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:55')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:55')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:55'))
+		   170 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:55')
+		   170 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   170 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   170 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   170 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   170 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   170 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   170 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   170 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   170 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   170 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   170 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   170 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   170 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   170 Quit	
+		   172 Connect	root@172.18.0.7 as anonymous on confianca_local
+		   172 Query	SET SQL_MODE=''
+		   172 Query	SET NAMES utf8
+		   172 Query	SELECT `eav_entity_type`.* FROM `eav_entity_type` WHERE (`eav_entity_type`.`entity_type_code`='order')
+		   172 Query	SELECT `website`.* FROM `core_website` AS `website` WHERE (website.code = "aitoccode")
+		   172 Query	SELECT `main`.`value` FROM `aitoc_cataloginventory_stock_settings` AS `main` WHERE (main.code = "inventory_convert_completed")
+		   172 Query	SELECT `core_url_rewrite`.* FROM `core_url_rewrite` WHERE (request_path IN ('media/custom/pagtos/pagtos-1533820762.png', 'media/custom/pagtos/pagtos-1533820762.png/')) AND (store_id IN(0, 1))
+		   172 Query	SELECT `cp`.`page_id` FROM `cms_page` AS `cp`
+ INNER JOIN `cms_page_store` AS `cps` ON cp.page_id = cps.page_id WHERE (cp.identifier = 'media/custom/pagtos/pagtos-1533820762.png') AND (cps.store_id IN (0, '1')) AND (cp.is_active = 1) ORDER BY `cps`.`store_id` DESC LIMIT 1
+		   172 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:55' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:55' or date_to IS NULL)
+		   172 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   172 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   172 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:55')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:55')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:55'))
+		   172 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:55')
+		   172 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   172 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+210326 18:04:56	   172 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   172 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   172 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   172 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   172 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   172 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   172 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   172 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   172 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   172 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   172 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   172 Quit	
+		   168 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:56' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:56' or date_to IS NULL)
+		   168 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   168 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   168 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:56')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:56')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:56'))
+		   168 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:56')
+		   168 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   168 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   168 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   168 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   168 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   168 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   168 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   168 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   168 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   168 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   168 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   168 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   168 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   168 Quit	
+		   169 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:56' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:56' or date_to IS NULL)
+		   169 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   169 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   169 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:56')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:56')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:56'))
+		   169 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:56')
+		   169 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   169 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   169 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   169 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   169 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   169 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   169 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   169 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   169 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   169 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   169 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+210326 18:04:57	   169 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   169 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   169 Quit	
+		   167 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:57' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:57' or date_to IS NULL)
+		   167 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   167 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   167 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:57')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:57')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:57'))
+		   167 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:57')
+		   167 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   167 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   167 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   167 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   167 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   167 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   167 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   167 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   167 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   167 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   167 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   167 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   167 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   167 Quit	
+		   171 Query	SELECT `main_table`.* FROM `design_change` AS `main_table` WHERE (store_id = '1') AND (date_from <= '2021-03-26 18:04:57' or date_from IS NULL) AND (date_to >= '2021-03-26 18:04:57' or date_to IS NULL)
+		   171 Query	SELECT `cms_page`.* FROM `cms_page`
+ INNER JOIN `cms_page_store` ON cms_page.page_id = cms_page_store.page_id WHERE (`cms_page`.`identifier`='no-route') AND (is_active = 1) AND (cms_page_store.store_id IN (0, 1)) ORDER BY `cms_page_store`.`store_id` DESC LIMIT 1
+		   171 Query	SELECT `cms_page_store`.`store_id` FROM `cms_page_store` WHERE (page_id = 1)
+		   171 Query	SELECT `main_table`.*, `mp`.`user_id`, `mp`.`unblock_until_date` FROM `manager_notification` AS `main_table`
+ INNER JOIN `manager_payment` AS `mp` ON mp.notification_id = main_table.entity_id WHERE (`type` = '3') AND (`main_table`.`action` IN(2, 3)) AND ((`date_from` IS NULL) OR (`date_from` <= '2021-03-26 18:04:57')) AND ((`date_to` IS NULL) OR (`date_to` >= '2021-03-26 18:04:57')) AND ((`unblock_until_date` IS NULL) OR (`unblock_until_date` <= '2021-03-26 18:04:57'))
+		   171 Query	SELECT `main_table`.* FROM `aw_countdown` AS `main_table` WHERE ((find_in_set('1', store_ids) OR find_in_set('0', store_ids))) AND (is_enabled = 1) AND (status = '1') AND (FIND_IN_SET(0, `customer_group_ids`)) AND (date_to > '2021-03-26 15:04:57')
+		   171 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_style') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   171 Query	SELECT `interface_configs`.* FROM `interface_configs` WHERE (`key` = 'default_script') AND (`theme` = 'biz/confianca') AND (`store_id` = '1')
+		   171 Query	SELECT `main_table`.* FROM `sales_flat_quote_address` AS `main_table` WHERE (`quote_id` IS NULL)
+		   171 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'telefones')
+		   171 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'whatsapp')
+		   171 Query	SELECT `core_variable`.*, IF(store.plain_value IS NULL, def.plain_value, store.plain_value) AS `plain_value`, IF(store.html_value IS NULL, def.html_value, store.html_value) AS `html_value`, `store`.`plain_value` AS `store_plain_value`, `store`.`html_value` AS `store_html_value` FROM `core_variable`
+ LEFT JOIN `core_variable_value` AS `def` ON def.variable_id = core_variable.variable_id AND def.store_id = 0
+ LEFT JOIN `core_variable_value` AS `store` ON store.variable_id = def.variable_id AND store.store_id = 0 WHERE (core_variable.code = 'sac')
+		   171 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-menus') AND (`theme` = 'biz/confianca')
+		   171 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='4')
+		   171 Query	SELECT `menu`.* FROM `menu` WHERE (`menu`.`id`='5')
+		   171 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   171 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   171 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   171 Query	SELECT `main_table`.* FROM `interface_scripts` AS `main_table` WHERE (`identifier` = 'rodape-pagamentos') AND (`theme` = 'biz/confianca')
+		   171 Quit	
