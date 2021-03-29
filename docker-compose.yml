@@ -82,7 +82,7 @@ services:
     volumes:
       - ./var/lib/mysql:/var/lib/mysql
       - ./mariadb/conf.d/custom.cnf:/etc/mysql/conf.d/100-custom.cnf
-      - ./var/log/mysql/mysql.log:/var/log/mysql/mysql.log
+      - ./var/www/logs/mysql/mysql.log:/var/log/mysql/mysql.log
     env_file:
       - .env
 
