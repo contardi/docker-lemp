@@ -96,6 +96,11 @@ RUN pecl install -f oauth \
 RUN pecl install -f redis \
 	&& docker-php-ext-enable redis
 
+# PDO PGSql
+RUN apt-get install -y libpq-dev \
+        && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+        && docker-php-ext-install pdo pdo_pgsql pgsql
+
 # Node
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y build-essential nodejs
