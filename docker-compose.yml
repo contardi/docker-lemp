@@ -54,6 +54,7 @@ services:
     environment:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
 
   php-fpm:
     build:
@@ -73,6 +74,7 @@ services:
     environment:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
 
   mariadb:
     image: mariadb/server:10.4
