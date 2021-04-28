@@ -1,6 +1,7 @@
 .idea
 .vscode
 /var/lib/
+/var/postgres/
 /var/app/
 /var/www/.bash_history
 /var/www/.composer

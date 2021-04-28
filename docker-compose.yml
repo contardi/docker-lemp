@@ -85,8 +85,9 @@ services:
       - ./var/lib/mysql:/var/lib/mysql
       - ./mariadb/conf.d/custom.cnf:/etc/mysql/conf.d/100-custom.cnf
       - ./var/www/logs/mysql/mysql.log:/var/log/mysql/mysql.log
-    env_file:
-      - .env
+    environment:
+      - MYSQL_USERNAME=root
+      - MYSQL_ROOT_PASSWORD=root
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -95,8 +96,8 @@ services:
       - mariadb:db
     ports:
       - 8080:80
-    env_file:
-      - .env
+    environment:
+      - PMA_ARBITRARY=1
 
   memcached:
     image: memcached:alpine
@@ -128,8 +129,11 @@ services:
       - "5672:5672"
     volumes:
       - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
-    env_file:
-      - .env
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=MYSECRETCOOKIE
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+      - RABBITMQ_DEFAULT_VHOST=/
 
   node:
     build:
@@ -149,11 +153,23 @@ services:
     container_name: lemp-mongodb
     ports:
       - 27017:27017
-    env_file:
-      - .env
+    environment:
+      - MONGO_USERNAME=root
+      - MONGO_PASSWORD=root
 
   mailhog:
     image: mailhog/mailhog:latest
     container_name: lemp-mailhog
     ports:
       - "8025:8025"
+
+#  postgres:
+#    image: postgres
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      PGDATA: /data/postgres
+#    volumes:
+#      - ./var/postgres:/data/postgres
+#    ports:
+#      - "5432:5432"
