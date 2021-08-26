@@ -104,6 +104,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer global require "squizlabs/php_codesniffer=*"
 RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
 
+# PHP MD
+RUN composer global require "phpmd/phpmd=*"
+RUN ln -s ~/.config/composer/vendor/bin/phpmd /usr/local/bin
+
 # Mailhog to send email
 ENV GOPATH=/opt/go
 RUN mkdir /opt/go 
@@ -114,10 +118,12 @@ RUN go get github.com/mailhog/mhsendmail \
 # Magerun
 RUN wget https://files.magerun.net/n98-magerun-2.0.0.phar --no-check-certificate \
     && chmod +x ./n98-magerun-2.0.0.phar \
-    && mv ./n98-magerun-2.0.0.phar /usr/local/bin/magerun
+    && mv ./n98-magerun-2.0.0.phar /usr/local/bin/magerun \
+
 # Modman
 RUN wget https://raw.githubusercontent.com/colinmollenhour/modman/master/modman -O /usr/local/bin/modman \
     && chmod +x /usr/local/bin/modman
+
 # Modgit
 RUN wget modgit https://raw.githubusercontent.com/jreinke/modgit/master/modgit -O \
     && chmod +x modgit \

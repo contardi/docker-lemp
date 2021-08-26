@@ -121,6 +121,10 @@ RUN composer global require "squizlabs/php_codesniffer=*" \
 RUN ~/.config/composer/vendor/bin/phpcs --config-set installed_paths ~/.config/composer/vendor/magento-ecg/coding-standard
 RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
 
+# PHP MD
+RUN composer global require "phpmd/phpmd=*"
+RUN ln -s ~/.config/composer/vendor/bin/phpmd /usr/local/bin
+
 # Mailhog to send email
 ENV GOPATH=/opt/go
 RUN mkdir /opt/go 
