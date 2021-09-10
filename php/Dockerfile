@@ -116,6 +116,11 @@ RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
 RUN composer global require "phpmd/phpmd=*"
 RUN ln -s ~/.config/composer/vendor/bin/phpmd /usr/local/bin
 
+# Magerun for Magento users
+RUN wget https://files.magerun.net/n98-magerun2.phar \
+    && chmod +x ./n98-magerun2.phar \
+    && mv ./n98-magerun2.phar /usr/local/bin/n98-magerun2
+
 # Mailhog to send email
 ENV GOPATH=/opt/go
 RUN mkdir /opt/go 
