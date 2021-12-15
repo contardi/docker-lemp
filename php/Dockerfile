@@ -55,7 +55,6 @@ RUN docker-php-ext-install bcmath \
     soap \
     sodium \
     sockets \
-    tokenizer \
     xml \
     xsl \
     zip
