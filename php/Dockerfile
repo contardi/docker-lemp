@@ -6,11 +6,11 @@ ARG USERNAME
 
 RUN echo "deb http://deb.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
 
-RUN apt-get update \ 
-    && apt-get install -y imagemagick \ 
-    vim \ 
+RUN apt-get update \
+    && apt-get install -y imagemagick \
+    vim \
     curl \
-    libmcrypt-dev \ 
+    libmcrypt-dev \
     autoconf \
     g++ \
     libtool \
@@ -54,10 +54,11 @@ RUN docker-php-ext-install bcmath \
     simplexml \
     soap \
     sodium \
-    sockets \
     xml \
     xsl \
     zip
+
+RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
 # PHP XDebug
 RUN pecl install xdebug \
