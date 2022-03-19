@@ -16,6 +16,10 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   php56-fpm:
     build:
@@ -35,6 +39,10 @@ services:
     environment:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   php74-fpm:
     build:
@@ -55,6 +63,10 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   php-fpm:
     build:
@@ -75,6 +87,10 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   mariadb:
     image: mariadb/server:10.4
@@ -88,6 +104,10 @@ services:
     environment:
       - MYSQL_USERNAME=root
       - MYSQL_ROOT_PASSWORD=root
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -98,16 +118,28 @@ services:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   memcached:
     image: memcached:alpine
     container_name: lemp-memcached
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   redis:
     image: redis:alpine
     container_name: lemp-redis
     depends_on:
       - webserver
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   elasticsearch:
     build:
@@ -134,6 +166,10 @@ services:
       - RABBITMQ_DEFAULT_USER=rabbitmq
       - RABBITMQ_DEFAULT_PASS=rabbitmq
       - RABBITMQ_DEFAULT_VHOST=/
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   node:
     build:
@@ -147,6 +183,10 @@ services:
     command: "node app.js"
     ports:
       - "3000:3000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   mongodb:
     image: mongo:latest
@@ -156,12 +196,20 @@ services:
     environment:
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=root
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   mailhog:
     image: mailhog/mailhog:latest
     container_name: lemp-mailhog
     ports:
       - "8025:8025"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
 #  postgres:
 #    image: postgres
