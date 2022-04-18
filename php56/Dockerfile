@@ -4,11 +4,11 @@ ARG USERGID
 ARG USERUID
 ARG USERNAME
 
-RUN apt-get update \ 
-    && apt-get install -y imagemagick \ 
-    vim \ 
+RUN apt-get update \
+    && apt-get install -y imagemagick \
+    vim \
     curl \
-    libmcrypt-dev \ 
+    libmcrypt-dev \
     autoconf \
     g++ \
     libtool \

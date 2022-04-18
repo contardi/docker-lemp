@@ -4,7 +4,7 @@ ARG USERGID
 ARG USERUID
 ARG USERNAME
 
-RUN echo "deb http://deb.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
+RUN echo "deb https://deb.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get install -y imagemagick \
@@ -70,6 +70,10 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_connect_back=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# PHP Imagick
+RUN pecl install -f imagick \
+    && docker-php-ext-enable imagick
 
 # PHP Memcache
 RUN pecl install -f memcached \

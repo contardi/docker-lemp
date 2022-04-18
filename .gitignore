@@ -1,6 +1,8 @@
 .idea
 .vscode
 /var/lib/
+/var/log/
+/shell/
 /var/postgres/
 /var/app/
 /var/www/.bash_history
@@ -12,10 +14,12 @@
 /var/www/.viminfo
 /var/www/composer.json
 /var/www/*.local
+/var/www/*.sh
+/var/www/*.net
 /var/www/logs/php_errors.log
 /var/app/node_modules/
 /nginx/conf.d/*.local.conf
-/nginx/certificates/*.local.crt
-/nginx/certificates/*.local.key
+/nginx/certificates/*.crt
+/nginx/certificates/*.key
 /ssh-keys/id_rsa*
 /ssh-keys/known*
