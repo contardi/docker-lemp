@@ -61,7 +61,7 @@ RUN docker-php-ext-install bcmath \
     xsl \
     zip
 
-# PHP XDebug
+# PHP XDebug - 2.9.8 because of Magento
 RUN pecl install xdebug-2.9.8 \
     && docker-php-ext-enable xdebug
 
