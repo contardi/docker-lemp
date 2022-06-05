@@ -29,7 +29,7 @@ That'll enable you to change the files with the same permissions as www-data int
 #### Access PHP Servers  
 PHP 5.6: `docker-compose exec php56-fpm bash`  
 PHP 7.4: `docker-compose exec php74-fpm bash`  
-PHP 8.1 (latest): `docker-compose exec php-fpm bash`  
+PHP 8.1: `docker-compose exec php-fpm bash`  
 
 #### Access Node Server
 Node user: `docker-compose exec node bash`  
