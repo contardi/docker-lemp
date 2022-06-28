@@ -8,12 +8,6 @@ services:
       - ./var/www:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/certificates:/etc/nginx/certificates
-    links:
-      - php56-fpm
-      - php74-fpm
-      - php-fpm
-      - mariadb
-      - opensearch
     ports:
       - "80:80"
       - "443:443"
@@ -41,6 +35,66 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
 
+  php71-fpm:
+    build:
+      context: php71
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+    container_name: lemp-php71
+    working_dir: /var/www
+    volumes:
+      - ./var/www:/var/www
+      - ./php71/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
+
+  php72-fpm:
+    build:
+      context: php72
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+    container_name: lemp-php72
+    working_dir: /var/www
+    volumes:
+      - ./var/www:/var/www
+      - ./php72/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
+
+  php73-fpm:
+    build:
+      context: php73
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+    container_name: lemp-php73
+    working_dir: /var/www
+    volumes:
+      - ./var/www:/var/www
+      - ./php73/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
+
   php74-fpm:
     build:
       context: php74
@@ -61,6 +115,7 @@ services:
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
 
+  #Version 8.1
   php-fpm:
     build:
       context: php
@@ -215,13 +270,13 @@ services:
       options:
         max-size: "10m"
 
-#  postgres:
-#    image: postgres
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: postgres
-#      PGDATA: /data/postgres
-#    volumes:
-#      - ./var/postgres:/data/postgres
-#    ports:
-#      - "5432:5432"
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - ./var/postgres:/data/postgres
+    ports:
+      - "5432:5432"

@@ -1,11 +1,14 @@
 #Docker LEMP + XDebug
-#### Just another LEMP + XDebug Docker
+#### Just another multipurpose LEMP + XDebug Docker
 
 You need to change the args into the docker-compose.yml files to your current user, UID and GID \
 That'll enable you to change the files with the same permissions as www-data into the php server 
 
 * NGINX
 * PHP 5.6
+* PHP 7.1
+* PHP 7.2
+* PHP 7.3
 * PHP 7.4
 * PHP 8.1 (latest)
 * XDebug
