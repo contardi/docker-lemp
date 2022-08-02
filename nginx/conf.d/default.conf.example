@@ -1,6 +1,10 @@
 server {
     listen 80;
-    listen [::]:80;
+    listen 443 ssl http2;
+
+    #openssl req -newkey rsa:2048 -nodes -keyout ./nginx/certificates/default.local.key -x509 -days 365 -out ./nginx/certificates/default.local.crt
+    ssl_certificate     /etc/nginx/certificates/default.local.crt;
+    ssl_certificate_key /etc/nginx/certificates/default.local.key;
 
     root /var/www/default.local/public;
     index index.php;
