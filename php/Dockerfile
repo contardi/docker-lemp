@@ -134,6 +134,7 @@ RUN go get github.com/mailhog/mhsendmail \
 
 # 775 and 664 folder permissions
 RUN echo "umask 0002" >> /etc/bash.bashrc
+RUN echo "source /etc/profile.d/bash_completion.sh" >> /etc/bash.bashrc
 
 # Fix current user permissions
 RUN chown -R www-data: /var/www \
