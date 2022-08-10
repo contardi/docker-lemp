@@ -236,9 +236,8 @@ services:
     container_name: lemp-node
     user: "node"
     volumes:
-      - ./var/app:/usr/app
-      - ./var/www:/var/www
-    working_dir: /usr/app
+      - ./var/www:/var/www/
+    working_dir: /var/www/app/node
     command: "node app.js"
     ports:
       - "3000:3000"
