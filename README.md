@@ -33,6 +33,12 @@ That'll enable you to change the files with the same permissions as www-data int
 PHP 5.6: `docker-compose exec php56-fpm bash`  
 PHP 7.4: `docker-compose exec php74-fpm bash`  
 PHP 8.1: `docker-compose exec php-fpm bash`  
+NGINX: `docker-compose exec webserver sh`  
+MariaDB: `docker-compose exec mariadb bash`
+
+#### Logs
+./var/logs/php_errors.log
+./var/logs/mysql/mysql.log
 
 #### Access Node Server
 Node user: `docker-compose exec node bash`  
