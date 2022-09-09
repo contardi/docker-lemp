@@ -1,4 +1,5 @@
 #Docker LEMP + XDebug
+
 #### Just another multipurpose LEMP + XDebug Docker
 
 You need to change the args into the docker-compose.yml files to your current user, UID and GID \
@@ -30,20 +31,20 @@ That'll enable you to change the files with the same permissions as www-data int
 **OpenSearch Dashoboards (Kibana)** http://localhost:5601/  
 
 #### Access PHP Servers  
-PHP 5.6: `docker-compose exec php56-fpm bash`  
-PHP 7.4: `docker-compose exec php74-fpm bash`  
-PHP 8.1: `docker-compose exec php-fpm bash`  
-NGINX: `docker-compose exec webserver sh`  
-MariaDB: `docker-compose exec mariadb bash`
+PHP 5.6: `docker compose exec php56-fpm bash`  
+PHP 7.4: `docker compose exec php74-fpm bash`  
+PHP 8.1: `docker compose exec php-fpm bash`  
+NGINX: `docker compose exec webserver sh`  
+MariaDB: `docker compose exec mariadb bash`
 
 #### Logs
 ./var/logs/php_errors.log
 ./var/logs/mysql/mysql.log
 
 #### Access Node Server
-Node user: `docker-compose exec node bash`  
-Root user: `docker-compose exec -u root node bash`
+Node user: `docker compose exec node bash`  
+Root user: `docker compose exec -u root node bash`
 
 To change default variables, edit `.env`  file 
 
-This is just a multipurpose repository intended to developer who need in a same envorinment PHP 5.6 within other PHP versions.
+This is just a multipurpose repository intended to developer who need in a same environment PHP 5.6 within other PHP versions.
