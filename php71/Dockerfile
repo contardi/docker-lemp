@@ -41,15 +41,8 @@ RUN apt-get update \
     zip \
     apt-utils
 
-RUN docker-php-ext-configure gd \
-        --with-gd \
-        --with-webp-dir \
-        --with-jpeg-dir \
-        --with-png-dir \
-        --with-zlib-dir \
-        --with-xpm-dir \
-        --with-freetype-dir \
-        --enable-gd-native-ttf
+RUN docker-php-ext-configure \
+  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/;
 
 RUN docker-php-ext-install bcmath \
     calendar \

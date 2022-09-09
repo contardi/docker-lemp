@@ -33,6 +33,7 @@ RUN apt-get update \
     golang-go \
     wget \
     git \
+    rsync \
     software-properties-common \
     bash-completion \
     cron \
@@ -51,7 +52,6 @@ RUN docker-php-ext-install bcmath \
     mysqli \
     opcache \
     pdo_mysql \
-    rsync \
     simplexml \
     soap \
     sodium \
