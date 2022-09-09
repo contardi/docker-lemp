@@ -33,6 +33,7 @@ RUN apt-get update \
     golang-go \
     wget \
     git \
+    rsync \
     software-properties-common \
     bash-completion \
     cron \
@@ -40,7 +41,8 @@ RUN apt-get update \
     zip \
     apt-utils
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-configure \
+  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/;
 
 RUN docker-php-ext-install bcmath \
     calendar \
@@ -50,7 +52,6 @@ RUN docker-php-ext-install bcmath \
     mysqli \
     opcache \
     pdo_mysql \
-    rsync \
     simplexml \
     soap \
     sockets \

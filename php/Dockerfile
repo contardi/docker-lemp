@@ -40,8 +40,9 @@ RUN apt-get update \
     zip \
     apt-utils
 
-RUN docker-php-ext-configure \
-  	gd --with-freetype --with-jpeg;
+RUN docker-php-ext-configure gd \
+            --with-jpeg \
+            --with-freetype;
 
 RUN docker-php-ext-install bcmath \
     calendar \
@@ -51,7 +52,6 @@ RUN docker-php-ext-install bcmath \
     mysqli \
     opcache \
     pdo_mysql \
-    rsync \
     simplexml \
     soap \
     sodium \
