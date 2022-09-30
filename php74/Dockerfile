@@ -31,7 +31,6 @@ RUN apt-get update \
     libsodium-dev \
     libzip-dev \
     golang-go \
-    wget \
     git \
     rsync \
     software-properties-common \
@@ -39,6 +38,8 @@ RUN apt-get update \
     cron \
     gnupg \
     zip \
+    wget \
+    python \
     apt-utils
 
 RUN docker-php-ext-configure \

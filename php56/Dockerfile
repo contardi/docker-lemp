@@ -36,6 +36,7 @@ RUN apt-get update \
     cron \
     gnupg \
     zip \
+    python \
     apt-utils
 
 RUN docker-php-ext-configure \
