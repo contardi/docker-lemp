@@ -162,6 +162,8 @@ services:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=1204M
+      - MEMORY_LIMIT=4096M
     logging:
       driver: "json-file"
       options:
