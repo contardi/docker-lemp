@@ -26,6 +26,7 @@ services:
     container_name: lemp-php56
     working_dir: /var/www
     volumes:
+      - ./var/log/php56/:/var/log/php56/
       - ./var/www:/var/www
       - ./php56/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
@@ -45,6 +46,7 @@ services:
     container_name: lemp-php71
     working_dir: /var/www
     volumes:
+      - ./var/log/php71/:/var/log/php71/
       - ./var/www:/var/www
       - ./php71/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
@@ -65,6 +67,7 @@ services:
     container_name: lemp-php72
     working_dir: /var/www
     volumes:
+      - ./var/log/php72/:/var/log/php72/
       - ./var/www:/var/www
       - ./php72/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
@@ -85,6 +88,7 @@ services:
     container_name: lemp-php73
     working_dir: /var/www
     volumes:
+      - ./var/log/php73/:/var/log/php73/
       - ./var/www:/var/www
       - ./php73/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
@@ -105,6 +109,7 @@ services:
     container_name: lemp-php74
     working_dir: /var/www
     volumes:
+      - ./var/log/php74/:/var/log/php74/
       - ./var/www:/var/www
       - ./php74/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
@@ -126,6 +131,7 @@ services:
     container_name: lemp-php
     working_dir: /var/www
     volumes:
+      - ./var/log/php81/:/var/log/php81/
       - ./var/www:/var/www
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
@@ -144,7 +150,7 @@ services:
     volumes:
       - ./var/lib/mysql:/var/lib/mysql
       - ./mariadb/conf.d/custom.cnf:/etc/mysql/conf.d/100-custom.cnf
-      - ./var/www/logs/mysql/mysql.log:/var/log/mysql/mysql.log
+      - ./var/logs/mysql/mysql.log:/var/log/mysql/mysql.log
     environment:
       - MYSQL_USERNAME=root
       - MYSQL_ROOT_PASSWORD=root
@@ -159,7 +165,7 @@ services:
     links:
       - mariadb:db
     ports:
-      - 8000:80
+      - 8080:80
     environment:
       - PMA_ARBITRARY=1
       - UPLOAD_LIMIT=1204M
@@ -177,21 +183,25 @@ services:
       options:
         max-size: "10m"
 
-  varnish:
-    image: varnish:7.0
-    container_name: lemp-varnish
-    ports:
-      - "8080:8080"
-      - "6082:6082"
-    depends_on:
-      - webserver
-    links:
-      - webserver
-    volumes:
-      - ./varnish/default.vcl:/etc/varnish/default.vcl
-    environment:
-      - VARNISH_SIZE=2G
-      - CACHE_SIZE=256M
+#  varnish:
+#    image: varnish:7.0
+#    container_name: lemp-varnish
+#    ports:
+#      - "8000:8000"
+#      - "6082:6082"
+#    depends_on:
+#      - webserver
+#    links:
+#      - webserver
+#    volumes:
+#      - ./varnish/default.vcl:/etc/varnish/default.vcl
+#    environment:
+#      - VARNISH_SIZE=2G
+#      - CACHE_SIZE=256M
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "10m"
 
   redis:
     image: redis:alpine
@@ -295,6 +305,10 @@ services:
       POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
     volumes:
-      - ./var/postgres:/data/postgres
+      - ./var/lib/postgres:/data/postgres
     ports:
       - "5432:5432"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
