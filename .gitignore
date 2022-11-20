@@ -4,7 +4,8 @@
 /var/log/
 /shell/
 /var/postgres/
-/var/app/
+/var/node/app
+!/var/node/app/app.js
 /var/www/.bash*
 /var/www/.composer
 /var/www/.env
