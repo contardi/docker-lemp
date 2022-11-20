@@ -19,6 +19,8 @@
 /var/www/*.local
 /var/www/*.sh
 /var/www/*.net
+/var/www/*.node*
+/var/www/*.magento-cloud*
 /var/www/logs/php_errors.log
 /var/app/node_modules/
 /nginx/conf.d/*.local.conf
