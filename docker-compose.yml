@@ -150,7 +150,7 @@ services:
     volumes:
       - ./var/lib/mysql:/var/lib/mysql
       - ./mariadb/conf.d/custom.cnf:/etc/mysql/conf.d/100-custom.cnf
-      - ./var/logs/mysql/mysql.log:/var/log/mysql/mysql.log
+      - ./var/log/mysql/mysql.log:/var/log/mysql/mysql.log
     environment:
       - MYSQL_USERNAME=root
       - MYSQL_ROOT_PASSWORD=root
@@ -270,7 +270,7 @@ services:
     env_file:
       - .env
     working_dir: /home/node/app
-    command: "node app.js"
+    command: "nodemon app.js"
     ports:
       - "3000:3000"
     logging:
@@ -281,6 +281,9 @@ services:
   mongodb:
     image: mongo:latest
     container_name: lemp-mongodb
+    volumes:
+      - ./var/lib/mongodb:/data/db
+      - ./var/log/mongo/mongodb.log:/var/log/mongodb/mongod.log
     ports:
       - 27017:27017
     environment:
