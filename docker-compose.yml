@@ -269,6 +269,8 @@ services:
       - ./var/node/app:/home/node/app
     env_file:
       - .env
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
     working_dir: /home/node/app
     command: "nodemon app.js"
     ports:
