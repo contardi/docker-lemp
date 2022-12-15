@@ -120,20 +120,19 @@ services:
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
 
-  #Version 8.1
-  php-fpm:
+  php81-fpm:
     build:
-      context: php
+      context: php81
       args:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-    container_name: lemp-php
+    container_name: lemp-php81
     working_dir: /var/www
     volumes:
       - ./var/log/php81/:/var/log/php81/
       - ./var/www:/var/www
-      - ./php/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php81/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
@@ -141,6 +140,28 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+
+  php82-fpm:
+    build:
+      context: php82
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+    container_name: lemp-php82
+    working_dir: /var/www
+    volumes:
+      - ./var/log/php82/:/var/log/php82/
+      - ./var/www:/var/www
+      - ./php82/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
+
 
   mariadb:
     image: mariadb/server:10.4
@@ -272,7 +293,7 @@ services:
     environment:
       - NODE_OPTIONS=--openssl-legacy-provider
     working_dir: /home/node/app
-    command: "nodemon app.js"
+    command: "nodemon index.js"
     ports:
       - "3000:3000"
     logging:

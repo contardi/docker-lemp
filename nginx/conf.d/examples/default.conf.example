@@ -16,7 +16,7 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass php-fpm:9000;
+        fastcgi_pass php82-fpm:9000;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PHP_VALUE "error_log=/var/log/nginx/php_errors.log";
