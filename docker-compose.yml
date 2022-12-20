@@ -35,69 +35,10 @@ services:
     environment:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
-
-  php71-fpm:
-    build:
-      context: php71
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php71
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php71/:/var/log/php71/
-      - ./var/www:/var/www
-      - ./php71/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
-
-  php72-fpm:
-    build:
-      context: php72
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php72
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php72/:/var/log/php72/
-      - ./var/www:/var/www
-      - ./php72/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
-
-  php73-fpm:
-    build:
-      context: php73
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php73
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php73/:/var/log/php73/
-      - ./var/www:/var/www
-      - ./php73/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   php74-fpm:
     build:
@@ -119,6 +60,10 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   php81-fpm:
     build:
@@ -140,6 +85,10 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   php82-fpm:
     build:
@@ -161,16 +110,19 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
-
-  mariadb:
-    image: mariadb/server:10.4
-    container_name: lemp-mariadb
+  mysql:
+    image: mysql:latest
+    container_name: lemp-mysql
     ports:
       - "3306:3306"
     volumes:
       - ./var/lib/mysql:/var/lib/mysql
-      - ./mariadb/conf.d/custom.cnf:/etc/mysql/conf.d/100-custom.cnf
+      - ./mysql/conf.d/custom.cnf:/etc/mysql/conf.d/100-custom.cnf
       - ./var/log/mysql/mysql.log:/var/log/mysql/mysql.log
     environment:
       - MYSQL_USERNAME=root
@@ -184,13 +136,32 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: lemp-phpmyadmin
     links:
-      - mariadb:db
+      - mysql:db
     ports:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
       - UPLOAD_LIMIT=1204M
       - MEMORY_LIMIT=4096M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+
+  sonarqube:
+    image: sonarqube:latest
+    container_name: lemp-sonarqube
+    links:
+      - postgres
+    ports:
+      - 9000:9000
+      - 9092:9092
+    environment:
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - SONARQUBE_JDBC_USERNAME=sonarqube
+      - SONARQUBE_JDBC_PASSWORD=sonarqube
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonarqube
     logging:
       driver: "json-file"
       options:
@@ -204,31 +175,22 @@ services:
       options:
         max-size: "10m"
 
-#  varnish:
-#    image: varnish:7.0
-#    container_name: lemp-varnish
-#    ports:
-#      - "8000:8000"
-#      - "6082:6082"
-#    depends_on:
-#      - webserver
-#    links:
-#      - webserver
-#    volumes:
-#      - ./varnish/default.vcl:/etc/varnish/default.vcl
-#    environment:
-#      - VARNISH_SIZE=2G
-#      - CACHE_SIZE=256M
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
+  teamcity:
+    image: jetbrains/teamcity-server:latest
+    container_name: lemp-teamcity
+    ports:
+      - 8111:8111
+    volumes:
+      - "./var/teamcity/datadir:/data/teamcity_server/datadir"
+      - "./var/log/teamcity/:/data/teamcity_server/logs"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   redis:
     image: redis:alpine
     container_name: lemp-redis
-    depends_on:
-      - webserver
     logging:
       driver: "json-file"
       options:
@@ -242,13 +204,17 @@ services:
       - cluster.name=opensearch-cluster
       - node.name=opensearch
       - bootstrap.memory_lock=true
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "DISABLE_INSTALL_DEMO_CONFIG=true"
-      - "DISABLE_SECURITY_PLUGIN=true"
-      - "discovery.type=single-node"
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+      - DISABLE_SECURITY_PLUGIN=true
+      - discovery.type=single-node
     ports:
       - 9200:9200
       - 9600:9600
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:1.2.0
@@ -260,6 +226,10 @@ services:
     environment:
       - 'OPENSEARCH_HOSTS=["http://opensearch:9200"]'
       - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
 
   rabbitmq:
     image: rabbitmq:management
@@ -331,8 +301,9 @@ services:
     image: postgres
     container_name: lemp-postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sonarqube
+      POSTGRES_USER: sonarqube
+      POSTGRES_PASSWORD: sonarqube
       PGDATA: /data/postgres
     volumes:
       - ./var/lib/postgres:/data/postgres

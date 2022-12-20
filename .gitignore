@@ -2,6 +2,7 @@
 .vscode
 /var/lib/
 /var/log/
+/var/teamcity/
 /shell/
 /var/postgres/
 /var/node/app
@@ -23,7 +24,6 @@
 /var/www/*.node*
 /var/www/*.magento-cloud*
 /var/www/logs/php_errors.log
-/var/app/node_modules/
 /nginx/conf.d/*.local.conf
 /nginx/conf.d/*.ddns.*.conf
 /nginx/certificates/*.crt

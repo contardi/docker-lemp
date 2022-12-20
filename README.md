@@ -1,19 +1,17 @@
 #Docker LEMP + XDebug
 
-#### Just another multipurpose LEMP + XDebug Docker
+### Just another multipurpose LEMP + XDebug Docker
 
-You need to change the args into the docker-compose.yml files to your current user, UID and GID \
-That'll enable you to change the files with the same permissions as www-data into the php server 
+This version uses MySQL, if you need a version with MariaDB it's possible use the v1.0  
+Don't forget to change the .env to your current user
 
 * NGINX
 * PHP 5.6
-* PHP 7.1
-* PHP 7.2
-* PHP 7.3
 * PHP 7.4
-* PHP 8.1 (latest)
-* XDebug
-* MariaDB 10.4 (Magento 2 compatibility)
+* PHP 8.1
+* PHP 8.2 (latest)
+* XDebug 3
+* MySQL 8
 * PHPMyAdmin
 * Mongo
 * Memcached
@@ -21,31 +19,23 @@ That'll enable you to change the files with the same permissions as www-data int
 * Redis
 * OpenSearch
 * RabbitMQ
+* SonarQube
+* TeamCity (CI by JetBrains)
 * Node (LTS)
 
-#### URLs
+### URLs
 **Nginx:** http://localhost/ - Folder var/www/  
-**Varnish:** http://localhost:8080/ - Folder var/www/  
 **Node:** http://localhost:3000/ Folder var/app    
 **PHPMyAdmin:** http://localhost:8000/  
 **Mailhog:** http://localhost:8025/  
 **OpenSearch Dashoboards (Kibana)** http://localhost:5601/  
+**SonarQube:** http://localhost:9000/ | admin:admin  
+**TeamCity:** http://localhost:8111/  (JetBrains CI)  
 
-#### Access PHP Servers  
-PHP 5.6: `docker compose exec php56-fpm bash`  
-PHP 7.4: `docker compose exec php74-fpm bash`  
-PHP 8.1: `docker compose exec php-fpm bash`  
-NGINX: `docker compose exec webserver sh`  
-MariaDB: `docker compose exec mariadb bash`
-
-#### Logs
-./var/logs/php_errors.log
-./var/logs/mysql/mysql.log
-
-#### Access Node Server
-Node user: `docker compose exec node bash`  
-Root user: `docker compose exec -u root node bash`
+### Logs
+PHP: ./var/log/php{VERSION}/php_errors.log  
+MySQL: ./var/log/mysql/mysql.log  
+Mongo: ./var/log/mongo/mongodb.log  
+TeamCity: ./var/log/teamcity/  
 
 To change default variables, edit `.env`  file 
-
-This is just a multipurpose repository intended to developer who need in a same environment PHP 5.6 within other PHP versions.
