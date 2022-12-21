@@ -154,7 +154,7 @@ services:
     links:
       - postgres
     ports:
-      - 9000:9000
+      - 9999:9000
       - 9092:9092
     environment:
       - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
@@ -170,19 +170,6 @@ services:
   memcached:
     image: memcached:alpine
     container_name: lemp-memcached
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-
-  teamcity:
-    image: jetbrains/teamcity-server:latest
-    container_name: lemp-teamcity
-    ports:
-      - 8111:8111
-    volumes:
-      - "./var/teamcity/datadir:/data/teamcity_server/datadir"
-      - "./var/log/teamcity/:/data/teamcity_server/logs"
     logging:
       driver: "json-file"
       options:

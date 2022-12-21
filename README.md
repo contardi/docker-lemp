@@ -20,7 +20,6 @@ Don't forget to change the .env to your current user
 * OpenSearch
 * RabbitMQ
 * SonarQube
-* TeamCity (CI by JetBrains)
 * Node (LTS)
 
 ### URLs
@@ -29,13 +28,11 @@ Don't forget to change the .env to your current user
 **PHPMyAdmin:** http://localhost:8000/  
 **Mailhog:** http://localhost:8025/  
 **OpenSearch Dashoboards (Kibana)** http://localhost:5601/  
-**SonarQube:** http://localhost:9000/ | admin:admin  
-**TeamCity:** http://localhost:8111/  (JetBrains CI)  
+**SonarQube:** http://localhost:9999/ | admin:admin  
 
 ### Logs
 PHP: ./var/log/php{VERSION}/php_errors.log  
 MySQL: ./var/log/mysql/mysql.log  
 Mongo: ./var/log/mongo/mongodb.log  
-TeamCity: ./var/log/teamcity/  
 
 To change default variables, edit `.env`  file 
