@@ -16,6 +16,22 @@ services:
       options:
         max-size: "10m"
 
+  varnish:
+    image: varnish:7.0
+    container_name: lemp-varnish
+    ports:
+      - "8080:8080"
+      - "6082:6082"
+    depends_on:
+      - webserver
+    links:
+      - webserver
+    volumes:
+      - ./varnish:/etc/varnish
+    environment:
+      - VARNISH_SIZE=2G
+      - CACHE_SIZE=256M
+
   php56-fpm:
     build:
       context: php56
@@ -138,7 +154,7 @@ services:
     links:
       - mysql:db
     ports:
-      - 8080:80
+      - 8000:80
     environment:
       - PMA_ARBITRARY=1
       - UPLOAD_LIMIT=1204M
@@ -244,15 +260,16 @@ services:
     container_name: lemp-node
     user: "node"
     volumes:
-      - ./var/node/app:/home/node/app
+      - ./var/node/app:/usr/src/app
     env_file:
       - .env
     environment:
       - NODE_OPTIONS=--openssl-legacy-provider
-    working_dir: /home/node/app
-    command: "nodemon index.js"
+    working_dir: /usr/src/app
+    command: "nodemon --exec 'node --inspect=0.0.0.0:9229 index.js'"
     ports:
       - "3000:3000"
+      - "9229:9229"
     logging:
       driver: "json-file"
       options:

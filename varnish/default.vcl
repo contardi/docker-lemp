@@ -1,16 +1,15 @@
-# VCL version 5.0 is not supported so it should be 4.0 even though actually used Varnish version is 6
 vcl 4.0;
 
 import std;
-# The minimal Varnish version is 6.0
+# The minimal Varnish version is 4.0
 # For SSL offloading, pass the following header in your proxy server or load balancer: 'X-Forwarded-Proto: https'
 
 backend default {
     .host = "webserver";
-    .port = "80";
+    .port = "8080";
     .first_byte_timeout = 600s;
     .probe = {
-        .url = "/pub/health_check.php";
+        .url = "/health_check.php";
         .timeout = 2s;
         .interval = 5s;
         .window = 10;
@@ -19,14 +18,10 @@ backend default {
 }
 
 acl purge {
-    "apache";
+    "webserver";
 }
 
 sub vcl_recv {
-    if (req.restarts > 0) {
-        set req.hash_always_miss = true;
-    }
-
     if (req.method == "PURGE") {
         if (client.ip !~ purge) {
             return (synth(405, "Method not allowed"));
@@ -62,13 +57,13 @@ sub vcl_recv {
         return (pass);
     }
 
-    # Bypass customer, shopping cart, checkout
-    if (req.url ~ "/customer" || req.url ~ "/checkout") {
+    # Bypass shopping cart and checkout
+    if (req.url ~ "/checkout") {
         return (pass);
     }
 
     # Bypass health check requests
-    if (req.url ~ "^/(pub/)?(health_check.php)$") {
+    if (req.url ~ "/pub/health_check.php") {
         return (pass);
     }
 
@@ -126,15 +121,15 @@ sub vcl_hash {
         hash_data(regsub(req.http.cookie, "^.*?X-Magento-Vary=([^;]+);*.*$", "\1"));
     }
 
+    if (req.url ~ "/graphql") {
+        call process_graphql_headers;
+    }
+
     # To make sure http users don't see ssl warning
     if (req.http.X-Forwarded-Proto) {
         hash_data(req.http.X-Forwarded-Proto);
     }
-    /* {{ design_exceptions_code }} */
-
-    if (req.url ~ "/graphql") {
-        call process_graphql_headers;
-    }
+    
 }
 
 sub process_graphql_headers {
@@ -172,10 +167,12 @@ sub vcl_backend_response {
         set beresp.http.X-Magento-Cache-Control = beresp.http.Cache-Control;
     }
 
-    # cache only successfully responses and 404s that are not marked as private
-    if (beresp.status != 200 &&
-            beresp.status != 404 &&
-            beresp.http.Cache-Control ~ "private") {
+    # cache only successfully responses and 404s
+    if (beresp.status != 200 && beresp.status != 404) {
+        set beresp.ttl = 120s;
+        set beresp.uncacheable = true;
+        return (deliver);
+    } elsif (beresp.http.Cache-Control ~ "private") {
         set beresp.uncacheable = true;
         set beresp.ttl = 86400s;
         return (deliver);
@@ -192,10 +189,10 @@ sub vcl_backend_response {
        (!beresp.http.Surrogate-Control &&
        beresp.http.Cache-Control ~ "no-cache|no-store") ||
        beresp.http.Vary == "*") {
-        # Mark as Hit-For-Pass for the next 2 minutes
+       # Mark as Hit-For-Pass for the next 2 minutes
         set beresp.ttl = 120s;
         set beresp.uncacheable = true;
-   }
+    }
 
    # If the cache key in the Magento response doesn't match the one that was sent in the request, don't cache under the request's key
    if (bereq.url ~ "/graphql" && bereq.http.X-Magento-Cache-Id && bereq.http.X-Magento-Cache-Id != beresp.http.X-Magento-Cache-Id) {

@@ -6,6 +6,7 @@ This version uses MySQL, if you need a version with MariaDB it's possible use th
 Don't forget to change the .env to your current user
 
 * NGINX
+* VARNISH (Configured for Magento 2)
 * PHP 5.6
 * PHP 7.4
 * PHP 8.1

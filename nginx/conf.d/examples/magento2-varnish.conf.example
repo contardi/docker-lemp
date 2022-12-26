@@ -1,0 +1,34 @@
+server {
+    listen 8080 default_server;
+    server_name default.local;
+
+    set $MAGE_ROOT /var/www/default.local; #don't forget to add the entry to your HOST machine
+    #set $MAGE_MODE developer;
+
+    include /var/www/default.local/nginx.conf.sample;
+}
+
+server {
+    listen 80;
+    listen 443 ssl http2;
+
+    #openssl req -newkey rsa:2048 -nodes -keyout ./nginx/certificates/default.local.key -x509 -days 365 -out ./nginx/certificates/default.local.crt
+    ssl_certificate     /etc/nginx/certificates/default.local.crt;
+    ssl_certificate_key /etc/nginx/certificates/default.local.key;
+
+    server_name default.local;
+    location / {
+       proxy_pass http://varnish;
+       proxy_set_header Host               $http_host;
+       proxy_set_header X-Forwarded-Host   $http_host;
+       proxy_set_header X-Real-IP          $remote_addr;
+       proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+       proxy_set_header X-Forwarded-Proto  https;
+       proxy_set_header X-Forwarded-Port   443;
+       proxy_buffer_size                   128k;
+       proxy_buffers                       4 256k;
+       proxy_busy_buffers_size             256k;
+       fastcgi_buffer_size                 32k;
+       fastcgi_buffers                     4 32k;
+   }
+}
