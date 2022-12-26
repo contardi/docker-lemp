@@ -4,7 +4,7 @@ usage() {
   echo "Disable XDebug
   Usage
   $ shell/disable-xdebug.sh {version}
-   * version: PHP Version, e.g. php73
+   * version: PHP Version, e.g. php81
   "
 }
 if [ "$1" == "-h" ] ; then
