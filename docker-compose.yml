@@ -32,30 +32,6 @@ services:
       - VARNISH_SIZE=2G
       - CACHE_SIZE=256M
 
-  php56-fpm:
-    build:
-      context: php56
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php56
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php56/:/var/log/php56/
-      - ./var/www:/var/www
-      - ./php56/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-
   php74-fpm:
     build:
       context: php74
