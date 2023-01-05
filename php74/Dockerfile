@@ -34,6 +34,7 @@ RUN apt-get update \
     git \
     rsync \
     software-properties-common \
+    sudo \
     bash-completion \
     cron \
     gnupg \
@@ -150,7 +151,10 @@ RUN chown -R www-data: /var/www \
 RUN groupadd --gid ${USERGID} ${USERNAME} \
     && useradd --uid ${USERUID} --gid ${USERNAME} --shell /bin/bash --create-home ${USERNAME} \
     && usermod -aG www-data ${USERNAME} \
-    && usermod -aG ${USERNAME} www-data
+    && usermod -aG ${USERNAME} www-data \
+    && usermod -aG sudo www-data
+
+RUN echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN cd /var/www \
     && find . -type d -exec chmod 775 {} \; \
