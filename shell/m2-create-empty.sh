@@ -23,7 +23,7 @@ if [ ${0} != "shell/m2-create-empty.sh" ]; then
 fi
 
 HOST=$1
-BASEDIR=$(echo ${PWD} | sed -e "s/shell\//g")
+BASEDIR=$(echo ${PWD} | sed -e "s/shell//g")
 DIR="${BASEDIR}/var/www/$HOST"
 DATABASE=$(echo $HOST | sed -e "s/\./_/g")
 
