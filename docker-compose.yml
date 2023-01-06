@@ -2,7 +2,7 @@ version: "3.7"
 services:
   webserver:
     image: nginx:alpine
-    container_name: lemp-webserver
+    container_name: m1-webserver
     working_dir: /var/www
     volumes:
       - ./var/www:/var/www
@@ -23,7 +23,7 @@ services:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-    container_name: lemp-php56
+    container_name: m1-php56
     working_dir: /var/www
     volumes:
       - ./var/log/php56/:/var/log/php56/
@@ -36,115 +36,9 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
 
-  php71-fpm:
-    build:
-      context: php71
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php71
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php71/:/var/log/php71/
-      - ./var/www:/var/www
-      - ./php71/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
-
-  php72-fpm:
-    build:
-      context: php72
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php72
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php72/:/var/log/php72/
-      - ./var/www:/var/www
-      - ./php72/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
-
-  php73-fpm:
-    build:
-      context: php73
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php73
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php73/:/var/log/php73/
-      - ./var/www:/var/www
-      - ./php73/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
-
-  php74-fpm:
-    build:
-      context: php74
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php74
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php74/:/var/log/php74/
-      - ./var/www:/var/www
-      - ./php74/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
-
-  #Version 8.1
-  php-fpm:
-    build:
-      context: php
-      args:
-        - USERGID=${USERGID}
-        - USERUID=${USERUID}
-        - USERNAME=${USERNAME}
-    container_name: lemp-php
-    working_dir: /var/www
-    volumes:
-      - ./var/log/php81/:/var/log/php81/
-      - ./var/www:/var/www
-      - ./php/config/php.ini:/usr/local/etc/php/php.ini
-      - ./ssh-keys:/var/www/.ssh/
-    env_file:
-      - .env
-    environment:
-      - TERM=xterm
-      - PHP_IDE_CONFIG=serverName=PHP
-      - COMPOSER_MEMORY_LIMIT=-1
-
   mariadb:
     image: mariadb/server:10.4
-    container_name: lemp-mariadb
+    container_name: m1-mariadb
     ports:
       - "3306:3306"
     volumes:
@@ -161,7 +55,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: lemp-phpmyadmin
+    container_name: m1-phpmyadmin
     links:
       - mariadb:db
     ports:
@@ -177,35 +71,15 @@ services:
 
   memcached:
     image: memcached:alpine
-    container_name: lemp-memcached
+    container_name: m1-memcached
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
 
-#  varnish:
-#    image: varnish:7.0
-#    container_name: lemp-varnish
-#    ports:
-#      - "8000:8000"
-#      - "6082:6082"
-#    depends_on:
-#      - webserver
-#    links:
-#      - webserver
-#    volumes:
-#      - ./varnish/default.vcl:/etc/varnish/default.vcl
-#    environment:
-#      - VARNISH_SIZE=2G
-#      - CACHE_SIZE=256M
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-
   redis:
     image: redis:alpine
-    container_name: lemp-redis
+    container_name: m1-redis
     depends_on:
       - webserver
     logging:
@@ -213,110 +87,11 @@ services:
       options:
         max-size: "10m"
 
-  opensearch:
-    build:
-      context: opensearch
-    container_name: lemp-opensearch
-    environment:
-      - cluster.name=opensearch-cluster
-      - node.name=opensearch
-      - bootstrap.memory_lock=true
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "DISABLE_INSTALL_DEMO_CONFIG=true"
-      - "DISABLE_SECURITY_PLUGIN=true"
-      - "discovery.type=single-node"
-    ports:
-      - 9200:9200
-      - 9600:9600
-
-  opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:1.2.0
-    container_name: lemp-opensearch-dashboards
-    ports:
-      - 5601:5601
-    expose:
-      - "5601"
-    environment:
-      - 'OPENSEARCH_HOSTS=["http://opensearch:9200"]'
-      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
-
-  rabbitmq:
-    image: rabbitmq:management
-    container_name: lemp-rabbitmq
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-    volumes:
-      - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
-    environment:
-      - RABBITMQ_ERLANG_COOKIE=MYSECRETCOOKIE
-      - RABBITMQ_DEFAULT_USER=rabbitmq
-      - RABBITMQ_DEFAULT_PASS=rabbitmq
-      - RABBITMQ_DEFAULT_VHOST=/
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-
-  node:
-    build:
-      context: node
-      args:
-        - USERNAME=${USERNAME}
-    container_name: lemp-node
-    user: "node"
-    volumes:
-      - ./var/node/app:/home/node/app
-    env_file:
-      - .env
-    environment:
-      - NODE_OPTIONS=--openssl-legacy-provider
-    working_dir: /home/node/app
-    command: "nodemon app.js"
-    ports:
-      - "3000:3000"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-
-  mongodb:
-    image: mongo:latest
-    container_name: lemp-mongodb
-    volumes:
-      - ./var/lib/mongodb:/data/db
-      - ./var/log/mongo/mongodb.log:/var/log/mongodb/mongod.log
-    ports:
-      - 27017:27017
-    environment:
-      - MONGO_USERNAME=root
-      - MONGO_PASSWORD=root
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: lemp-mailhog
+    container_name: m1-mailhog
     ports:
       - "8025:8025"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-
-  postgres:
-    image: postgres
-    container_name: lemp-postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      PGDATA: /data/postgres
-    volumes:
-      - ./var/lib/postgres:/data/postgres
-    ports:
-      - "5432:5432"
     logging:
       driver: "json-file"
       options:
