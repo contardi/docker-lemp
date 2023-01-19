@@ -3,7 +3,7 @@
 usage() {
   echo "Store importer M2 v 2.0
   Usage
-  $ shell/utils/m2-indexer.sh {destination} @
+  $ shell/m2-indexer.sh {destination} @
    * destination: folder and host to be cleared, e.g. magento2.local
    * @: consecutives parameters, can be any of
     design_config_grid                       Design Config Grid
