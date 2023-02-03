@@ -40,6 +40,7 @@ RUN apt-get update \
     gnupg \
     zip \
     wget \
+    rsync \
     python \
     apt-utils
 

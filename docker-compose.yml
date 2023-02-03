@@ -52,6 +52,7 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+      - COMPOSER_PROCESS_TIMEOUT=600
     logging:
       driver: "json-file"
       options:
@@ -77,6 +78,7 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+      - COMPOSER_PROCESS_TIMEOUT=600
     logging:
       driver: "json-file"
       options:
@@ -102,6 +104,7 @@ services:
       - TERM=xterm
       - PHP_IDE_CONFIG=serverName=PHP
       - COMPOSER_MEMORY_LIMIT=-1
+      - COMPOSER_PROCESS_TIMEOUT=600
     logging:
       driver: "json-file"
       options:

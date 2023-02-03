@@ -38,6 +38,7 @@ RUN apt-get update \
     bash-completion \
     cron \
     gnupg \
+    rsync \
     zip \
     apt-utils
 
