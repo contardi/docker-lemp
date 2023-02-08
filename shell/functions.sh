@@ -118,8 +118,8 @@ setFilePermissions() {
 
 createDatabase() {
   echo "Creating database"
-  mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS $DATABASE;"
-  mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS $DATABASE CHARACTER SET utf8 COLLATE utf8_general_ci;"
+  docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS $DATABASE;"
+  docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS $DATABASE CHARACTER SET utf8 COLLATE utf8_general_ci;"
 }
 
 updateStore() {

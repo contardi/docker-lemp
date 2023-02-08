@@ -42,6 +42,6 @@ sudo rm ${BASEDIR}/nginx/certificates/${STORE}*.crt
 sudo rm ${BASEDIR}/nginx/certificates/${STORE}*.key
 
 echo "Deleting database..."
-mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS ${STORE}_local;"
+docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS ${STORE}_local;"
 
 echo "Done!"
