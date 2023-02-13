@@ -7,7 +7,6 @@ Don't forget to change the .env to your current user
 
 * NGINX
 * VARNISH (Configured for Magento 2)
-* PHP 5.6
 * PHP 7.4
 * PHP 8.1
 * PHP 8.2 (latest)
@@ -15,7 +14,6 @@ Don't forget to change the .env to your current user
 * MySQL 8
 * PHPMyAdmin
 * Mongo
-* Memcached
 * Mailhog
 * Redis
 * OpenSearch

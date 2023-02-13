@@ -102,7 +102,7 @@ RUN apt-get install -y libpq-dev \
         && docker-php-ext-install pdo pdo_pgsql pgsql
 
 # Node and Yarn
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y build-essential nodejs
 
 #Yarn

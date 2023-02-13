@@ -7,7 +7,7 @@ server {
     ssl_certificate_key /etc/nginx/certificates/default.local.key;
 
     root /var/www/default.local/public;
-    index index.php;
+    index index.php index.html;
 
     server_name default.local;
 
