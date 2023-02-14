@@ -54,6 +54,7 @@ RUN docker-php-ext-install bcmath \
     mysqli \
     opcache \
     pdo_mysql \
+    pcntl \
     simplexml \
     soap \
     sodium \
@@ -121,7 +122,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Code Sniffer
 RUN composer global require "squizlabs/php_codesniffer=*" \
-    && composer global require magento-ecg/coding-standard
+    && composer global require magento-ecg/coding-standard \
+
 RUN ~/.config/composer/vendor/bin/phpcs --config-set installed_paths ~/.config/composer/vendor/magento-ecg/coding-standard
 RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
 
@@ -133,6 +135,9 @@ RUN ln -s ~/.config/composer/vendor/bin/phpmd /usr/local/bin
 RUN wget https://files.magerun.net/n98-magerun2.phar \
     && chmod +x ./n98-magerun2.phar \
     && mv ./n98-magerun2.phar /usr/local/bin/magerun2
+
+#Magento Cloud Cli - https://experienceleague.adobe.com/docs/commerce-cloud-service/user-guide/dev-tools/cloud-cli.html
+su -c 'curl -sS https://accounts.magento.cloud/cli/installer | php' www-data
 
 # Mailhog to send email
 ENV GOPATH=/opt/go
