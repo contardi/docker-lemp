@@ -122,7 +122,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Code Sniffer
 RUN composer global require "squizlabs/php_codesniffer=*" \
-    && composer global require magento-ecg/coding-standard \
+    && composer global require magento-ecg/coding-standard
 
 RUN ~/.config/composer/vendor/bin/phpcs --config-set installed_paths ~/.config/composer/vendor/magento-ecg/coding-standard
 RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin

@@ -118,7 +118,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Code Sniffer
 RUN composer global require "squizlabs/php_codesniffer=*" \
-    && composer global require magento-ecg/coding-standard \
+    && composer global require magento-ecg/coding-standard
 
 RUN ~/.config/composer/vendor/bin/phpcs --config-set installed_paths ~/.config/composer/vendor/magento-ecg/coding-standard
 RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
@@ -126,6 +126,10 @@ RUN ln -s ~/.config/composer/vendor/bin/phpcs /usr/local/bin
 # PHP MD
 RUN composer global require "phpmd/phpmd=*"
 RUN ln -s ~/.config/composer/vendor/bin/phpmd /usr/local/bin
+
+#PHP Unit global
+RUN composer global require "phpunit/phpunit=*"
+RUN ln -s ~/.config/composer/vendor/bin/phpunit /usr/local/bin
 
 # Magerun for Magento users
 RUN wget https://files.magerun.net/n98-magerun2.phar \
