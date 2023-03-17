@@ -42,8 +42,8 @@ MYSQL_USER=root
 MYSQL_PASSWORD=root
 
 SEARCH_ENGINE='elasticsearch7'
-ELASTICSEARCH_HOSTNAME='opensearch'
-ELASTICSEARCH_PREFIX=$(echo $HOST | sed -e "s/\.//g")
+OPENSEARCH_HOSTNAME='opensearch'
+OPENSEARCH_PREFIX=$(echo $HOST | sed -e "s/\.//g")
 
 AMQP_HOST=rabbitmq
 AMQP_USER=rabbitmq

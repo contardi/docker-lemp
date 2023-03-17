@@ -209,8 +209,8 @@ installM2() {
      --base-url-secure=${MAGENTO_BASE_URL_SECURE}  \
      --use-secure-admin=${MAGENTO_USE_SECURE_ADMIN} \
      --use-rewrites=1 \
-     --elasticsearch-host=${ELASTICSEARCH_HOSTNAME} \
-     --elasticsearch-index-prefix=${ELASTICSEARCH_PREFIX} \
+     --opensearch-host=${OPENSEARCH_HOSTNAME} \
+     --opensearch-host=${OPENSEARCH_HOSTNAME} \
      --admin-firstname=${MAGENTO_ADMIN_FIRSTNAME} \
      --admin-lastname=${MAGENTO_ADMIN_LASTNAME} \
      --admin-email=${MAGENTO_ADMIN_EMAIL} \
