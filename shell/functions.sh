@@ -227,10 +227,8 @@ installM2() {
 
     #Disable unused modules
     bin/magento module:disable Magento_Marketplace
-    bin/magento module:disable Magento_NewRelicReporting
     bin/magento module:disable Magento_Ups
     bin/magento module:disable Magento_Usps
-    bin/magento module:disable Magento_TwoFactorAuth
 
     bin/magento deploy:mode:set developer
 
