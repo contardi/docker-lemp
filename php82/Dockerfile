@@ -145,6 +145,9 @@ RUN mkdir /opt/go
 RUN go get github.com/mailhog/mhsendmail \
     && echo "sendmail_path=\"/opt/go/bin/mhsendmail --smtp-addr='mailhog:1025'\"" > /usr/local/etc/php/conf.d/docker-php-ext-mailhog.ini
 
+#Laravel Installer
+RUN composer global require laravel/installer
+
 # 775 and 664 folder permissions
 RUN echo "umask 0002" >> /etc/bash.bashrc
 RUN echo "source /etc/profile.d/bash_completion.sh" >> /etc/bash.bashrc
