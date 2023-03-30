@@ -109,9 +109,6 @@ setFilePermissions() {
   sudo chown -R www-data: ${DIR}/
 
   sudo chmod g+w ${DIR}/
-  if [ ! -f ${DIR}/composer.json ]; then
-    sudo chmod g+w ${DIR}/composer.json
-  fi
   sudo chmod -R g+w ${DIR}/
 
 }
