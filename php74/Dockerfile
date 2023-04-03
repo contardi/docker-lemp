@@ -136,9 +136,6 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
     && chmod +x ./n98-magerun2.phar \
     && mv ./n98-magerun2.phar /usr/local/bin/magerun2
 
-#Magento Cloud Cli - https://experienceleague.adobe.com/docs/commerce-cloud-service/user-guide/dev-tools/cloud-cli.html
-RUN su -c 'curl -sS https://accounts.magento.cloud/cli/installer | php' www-data
-
 # Mailhog to send email
 ENV GOPATH=/opt/go
 RUN mkdir /opt/go
@@ -160,6 +157,9 @@ RUN groupadd --gid ${USERGID} ${USERNAME} \
     && usermod -aG sudo www-data
 
 RUN echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+#Magento Cloud Cli - https://experienceleague.adobe.com/docs/commerce-cloud-service/user-guide/dev-tools/cloud-cli.html
+RUN su -c 'curl -sS https://accounts.magento.cloud/cli/installer | php' www-data
 
 RUN cd /var/www \
     && find . -type d -exec chmod 775 {} \; \
