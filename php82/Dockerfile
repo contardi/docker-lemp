@@ -137,7 +137,7 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
     && mv ./n98-magerun2.phar /usr/local/bin/n98-magerun2
 
 #Magento Cloud Cli - https://experienceleague.adobe.com/docs/commerce-cloud-service/user-guide/dev-tools/cloud-cli.html
-su -c 'curl -sS https://accounts.magento.cloud/cli/installer | php' www-data
+RUN su -c 'curl -sS https://accounts.magento.cloud/cli/installer | php' www-data
 
 # Mailhog to send email
 ENV GOPATH=/opt/go
