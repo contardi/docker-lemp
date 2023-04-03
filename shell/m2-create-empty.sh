@@ -25,35 +25,6 @@ fi
 HOST=$1
 BASEDIR=$(echo ${PWD} | sed -e "s/shell//g")
 DIR="${BASEDIR}/var/www/$HOST"
-DATABASE=$(echo $HOST | sed -e "s/\./_/g")
-
-MAGENTO_BASE_DIR=/var/www/$HOST/
-MAGENTO_LANGUAGE=pt_BR
-MAGENTO_TIMEZONE=America/Sao_Paulo
-MAGENTO_DEFAULT_CURRENCY=BRL
-MAGENTO_URL=https://$HOST
-MAGENTO_BACKEND_FRONTNAME=painel
-MAGENTO_USE_SECURE=1
-MAGENTO_BASE_URL_SECURE=https://$HOST
-MAGENTO_USE_SECURE_ADMIN=1
-
-MYSQL_HOST=mysql
-MYSQL_USER=root
-MYSQL_PASSWORD=root
-
-SEARCH_ENGINE='elasticsearch7'
-OPENSEARCH_HOSTNAME='opensearch'
-OPENSEARCH_PREFIX=$(echo $HOST | sed -e "s/\.//g")
-
-AMQP_HOST=rabbitmq
-AMQP_USER=rabbitmq
-AMQP_PASS=rabbitmq
-AMQP_PORT=5672
-AMQP_VIRTUALHOST=/
-
-COMPOSER_HOME=/var/www/.composer
-STORE_NAME="M2 Biz Pro"
-STORE_EMAIL=admin@$HOST
 
 createDir
 

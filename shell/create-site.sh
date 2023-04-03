@@ -25,13 +25,6 @@ fi
 HOST=$1
 BASEDIR=$(echo ${PWD} | sed -e "s/shell//g")
 DIR="${BASEDIR}/var/www/$HOST"
-DATABASE=$(echo $HOST | sed -e "s/\./_/g")
-
-MYSQL_HOST=mysql
-MYSQL_USER=root
-MYSQL_PASSWORD=root
-
-COMPOSER_HOME=/var/www/.composer
 
 createDir
 

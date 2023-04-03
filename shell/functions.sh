@@ -3,6 +3,25 @@
 CURRENTDIR=$(dirname "$0")
 source $CURRENTDIR/.env
 
+COMPOSER_HOME=/var/www/.composer
+DATABASE=$(echo $HOST | sed -e "s/\./_/g")
+
+MAGENTO_LANGUAGE=pt_BR
+MAGENTO_TIMEZONE=America/Sao_Paulo
+MAGENTO_DEFAULT_CURRENCY=BRL
+MAGENTO_URL=https://$HOST
+MAGENTO_BACKEND_FRONTNAME=painel
+MAGENTO_USE_SECURE=1
+MAGENTO_BASE_URL_SECURE=https://$HOST
+MAGENTO_USE_SECURE_ADMIN=1
+
+MYSQL_HOST=mysql
+MYSQL_USER=root
+MYSQL_PASSWORD=root
+
+OPENSEARCH_HOSTNAME='opensearch'
+OPENSEARCH_PREFIX=$(echo $HOST | sed -e "s/\.//g")
+
 createDir() {
   echo "Verifying ${DIR}..."
   if [ ! -d "${DIR}" ]; then
@@ -207,7 +226,7 @@ installM2() {
      --use-secure-admin=${MAGENTO_USE_SECURE_ADMIN} \
      --use-rewrites=1 \
      --opensearch-host=${OPENSEARCH_HOSTNAME} \
-     --opensearch-host=${OPENSEARCH_HOSTNAME} \
+     --opensearch-index-prefix=${OPENSEARCH_PREFIX} \
      --admin-firstname=${MAGENTO_ADMIN_FIRSTNAME} \
      --admin-lastname=${MAGENTO_ADMIN_LASTNAME} \
      --admin-email=${MAGENTO_ADMIN_EMAIL} \
