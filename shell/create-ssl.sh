@@ -12,9 +12,6 @@ fi
 CURRENTDIR=$(dirname "$0")
 echo "importing $CURRENTDIR/functions.sh"
 source $CURRENTDIR/functions.sh
-BASEDIR=$(echo ${PWD} | sed -e "s/shell\//g")
-
-HOST=$1
 
 if [  -n "$(uname -a | grep Ubuntu)" ]; then
   echo "Verifying mkcert in Ubuntu OS"

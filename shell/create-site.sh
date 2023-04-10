@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CURRENTDIR=$(dirname "$0")
+
 echo "importing $CURRENTDIR/functions.sh"
 source $CURRENTDIR/functions.sh
 
@@ -21,10 +22,6 @@ if [ ${0} != "shell/create-site.sh" ]; then
   echo "You must run the script in the lemp folder"
   exit 0
 fi
-
-HOST=$1
-BASEDIR=$(echo ${PWD} | sed -e "s/shell//g")
-DIR="${BASEDIR}/var/www/$HOST"
 
 createDir
 

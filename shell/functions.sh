@@ -3,8 +3,12 @@
 CURRENTDIR=$(dirname "$0")
 source $CURRENTDIR/.env
 
+HOST=$1
+BASEDIR=$(echo ${PWD} | sed -e "s/shell//g")
+DIR="${BASEDIR}/var/www/$HOST"
+
 COMPOSER_HOME=/var/www/.composer
-DATABASE=$(echo $HOST | sed -e "s/\./_/g")
+DATABASE=$(echo ${HOST} | sed -e "s/\./_/g")
 
 MAGENTO_LANGUAGE=pt_BR
 MAGENTO_TIMEZONE=America/Sao_Paulo
@@ -135,7 +139,7 @@ setFilePermissions() {
 createDatabase() {
   echo "Creating database"
   docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS $DATABASE;"
-  docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS $DATABASE CHARACTER SET utf8 COLLATE utf8_general_ci;"
+  docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS $DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 }
 
 updateStore() {
