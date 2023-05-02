@@ -9,11 +9,11 @@ RUN echo "deb https://deb.debian.org/debian stretch-backports main" >> /etc/apt/
 RUN apt-get update \
     && apt-get install -y imagemagick \
     vim \
+    libtool \
     curl \
     libmcrypt-dev \
     autoconf \
     g++ \
-    libtool \
     libcurl4-openssl-dev \
     libpng-dev \
     openssl \
