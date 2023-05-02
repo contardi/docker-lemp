@@ -4,8 +4,6 @@ ARG USERGID
 ARG USERUID
 ARG USERNAME
 
-RUN echo "deb https://deb.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
-
 RUN apt-get update \
     && apt-get install -y imagemagick \
     libmcrypt-dev \
