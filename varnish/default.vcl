@@ -9,7 +9,7 @@ backend default {
     .port = "8080";
     .first_byte_timeout = 600s;
     .probe = {
-        .url = "/health_check.php";
+        .url = "/pub/health_check.php";
         .timeout = 2s;
         .interval = 5s;
         .window = 10;
@@ -129,7 +129,7 @@ sub vcl_hash {
     if (req.http.X-Forwarded-Proto) {
         hash_data(req.http.X-Forwarded-Proto);
     }
-    
+
 }
 
 sub process_graphql_headers {
@@ -242,7 +242,7 @@ sub vcl_hit {
             return (deliver);
         } else {
             # Hit after TTL and grace expiration
-            return (restart);
+            return (fetch);
         }
     } else {
         # server is not healthy, retrieve from cache
