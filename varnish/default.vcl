@@ -9,7 +9,7 @@ backend default {
     .port = "8080";
     .first_byte_timeout = 600s;
     .probe = {
-        .url = "/pub/health_check.php";
+        .url = "/health_check.php";
         .timeout = 2s;
         .interval = 5s;
         .window = 10;
@@ -242,7 +242,7 @@ sub vcl_hit {
             return (deliver);
         } else {
             # Hit after TTL and grace expiration
-            return (fetch);
+            return (restart);
         }
     } else {
         # server is not healthy, retrieve from cache
