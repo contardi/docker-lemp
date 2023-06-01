@@ -164,14 +164,6 @@ services:
       options:
         max-size: "10m"
 
-  memcached:
-    image: memcached:alpine
-    container_name: lemp-memcached
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-
   redis:
     image: redis:alpine
     container_name: lemp-redis
