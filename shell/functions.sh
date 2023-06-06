@@ -249,6 +249,7 @@ installM2() {
     bin/magento module:disable Magento_Marketplace
     bin/magento module:disable Magento_Ups
     bin/magento module:disable Magento_Usps
+    bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorAuth
 
     bin/magento deploy:mode:set developer
 
