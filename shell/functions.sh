@@ -58,7 +58,7 @@ installMkCert() {
 
 generateSignedCertificate() {
   echo "Generating Signed Certificates"
-  mkcert -cert-file ${BASEDIR}/nginx/certificates/${HOST}.crt -key-file ${BASEDIR}/nginx/certificates/${HOST}.key ${HOST} localhost 127.0.0.1 ::1
+  mkcert -cert-file ${BASEDIR}/nginx/certificates/${HOST}.crt -key-file ${BASEDIR}/nginx/certificates/${HOST}.key ${HOST}
 
   echo "Update certificates"
   sudo update-ca-certificates
