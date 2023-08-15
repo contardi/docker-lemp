@@ -138,7 +138,7 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
 ENV GOPATH=/opt/go
 ENV GO111MODULE=on
 RUN mkdir /opt/go
-RUN go install github.com/mailhog/mhsendmail@latest \
+RUN go get github.com/mailhog/mhsendmail \
     && echo "sendmail_path=\"/opt/go/bin/mhsendmail --smtp-addr='mailhog:1025'\"" > /usr/local/etc/php/conf.d/docker-php-ext-mailhog.ini
 
 # 775 and 664 folder permissions
