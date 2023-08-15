@@ -111,7 +111,7 @@ services:
         max-size: "10m"
 
   mysql:
-    image: mysql:latest
+    image: mysql:8.0
     container_name: lemp-mysql
     ports:
       - "3306:3306"
