@@ -167,6 +167,8 @@ services:
   redis:
     image: redis:alpine
     container_name: lemp-redis
+    ports:
+      - "6379:6379"
     logging:
       driver: "json-file"
       options:
