@@ -30,6 +30,7 @@ To change default variables, edit `.env`  file
 **Mailhog:** http://localhost:8025/  
 **OpenSearch Dashoboards (Kibana)** http://localhost:5601/  
 **SonarQube:** http://localhost:9999/ | admin:admin  
+**RabbitMQ:** http://localhost:15672/ | rabbitmq:rabbitmq  
 
 ### Logs
 PHP: ./var/log/php{VERSION}/php_errors.log  
