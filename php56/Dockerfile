@@ -12,23 +12,30 @@ RUN apt-get update \
     curl \
     libmcrypt-dev \
     autoconf \
-    g++ \
+    g++
+
+RUN apt-get install -y \
     libtool \
     libpng-dev \
     openssl \
     libxml2-dev \
-    libmemcached-dev \
+    libmemcached-dev
+
+RUN apt-get install -y \
     musl \
     make \
     libpcre3 \
     iproute2 \
     libsodium-dev \
-    libc-client-dev \
-    libcurl4-openssl-dev \
+    libc-client-dev
+
+RUN apt-get install -y \
     libpcre3-dev \
     libxslt1-dev \
     libmagickwand-dev \
-    libmagickcore-dev \
+    libmagickcore-dev
+
+RUN apt-get install -y \
     golang-go \
     wget \
     git \
@@ -46,27 +53,34 @@ RUN docker-php-ext-configure \
 
 RUN docker-php-ext-install bcmath \
     calendar \
-    curl \
     gd \
     intl \
     mcrypt \
     mysql \
-    mysqli \
-    opcache \
+    mysqli
+
+RUN docker-php-ext-install opcache \
     pdo_mysql \
     simplexml \
     soap \
-    sockets \
-    tokenizer \
+    sockets
+
+RUN docker-php-ext-install tokenizer \
     xml \
     xmlrpc \
     xsl \
     zip
 
-# PHP XDebug
-RUN pecl install xdebug-2.5.5 \
-    && pecl channel-update pecl.php.net \
-    && docker-php-ext-enable xdebug
+RUN cd /tmp && \
+    git clone https://github.com/xdebug/xdebug.git && \
+    cd xdebug && \
+    git checkout xdebug_2_5 && \
+    phpize && \
+    ./configure --enable-xdebug && \
+    make && \
+    make install && \
+    rm -rf /tmp/xdebug
+RUN docker-php-ext-enable xdebug
 
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
@@ -74,31 +88,6 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_connect_back=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-# PHP Imagick
-RUN pecl install imagick \
-    && docker-php-ext-enable imagick
-
-# PHP Memcache
-RUN pecl install memcached-2.2.0 \
-    && docker-php-ext-enable memcached
-
-# PHP OAuth
-RUN pecl install oauth-1.2.3 \
- 	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
-
-# PHP Redis
-RUN pecl install --force redis-4.3.0 \
-	&& docker-php-ext-enable redis
-
-# PDO PGSql
-RUN apt-get install -y libpq-dev \
-        && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-        && docker-php-ext-install pdo pdo_pgsql pgsql
-
-# Node and Yarn
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y build-essential nodejs
 
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
