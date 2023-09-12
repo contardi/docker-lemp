@@ -208,6 +208,7 @@ installM2() {
 
     sudo chown -R www-data: ${DIR}/
 
+    docker compose exec -T php81-fpm /bin/bash -c "chown -R www-data: /var/www/"
     docker compose exec -T --user www-data php81-fpm /bin/bash -c "
     cd /var/www/${HOST}/
 
