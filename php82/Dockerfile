@@ -3,6 +3,7 @@ FROM php:8.2-fpm
 ARG USERGID
 ARG USERUID
 ARG USERNAME
+ARG NODE_MAJOR
 
 RUN apt-get update \
     && apt-get install -y imagemagick \
