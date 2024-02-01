@@ -138,12 +138,15 @@ setFilePermissions() {
 
 createDatabase() {
   echo "Creating database"
+  cd ${BASEDIR} || echo "Directory not found"
   docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS $DATABASE;"
   docker compose exec mysql mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS $DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 }
 
 updateStore() {
   echo "Update store"
+  cd ${BASEDIR} || echo "Directory not found"
+
   docker compose exec -T --user www-data php81-fpm /bin/bash -c "
   cd /var/www/${HOST}/
   composer update && \
@@ -161,6 +164,7 @@ updateStore() {
 
 updateGit() {
   echo "Update store"
+  cd ${BASEDIR} || echo "Directory not found"
   docker compose exec -T --user www-data php81-fpm /bin/bash -c "
   cd /var/www/${HOST}/
 
@@ -208,6 +212,7 @@ installM2() {
 
     sudo chown -R www-data: ${DIR}/
 
+    cd ${BASEDIR} || echo "Directory not found"
     docker compose exec -T php81-fpm /bin/bash -c "chown -R www-data: /var/www/"
     docker compose exec -T --user www-data php81-fpm /bin/bash -c "
     cd /var/www/${HOST}/
