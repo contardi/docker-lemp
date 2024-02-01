@@ -17,11 +17,11 @@ if [ "$1" == "help" ] ; then
   exit 0;
 fi
 
-VERSION="php74"
+VERSION="php82"
 
 if [ $# -eq 1 ]; then
   VERSION=$1
 fi
 
-docker-compose exec ${VERSION}-fpm mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.old
-docker-compose restart ${VERSION}-fpm
+docker compose exec ${VERSION}-fpm mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.old
+docker compose restart ${VERSION}-fpm
