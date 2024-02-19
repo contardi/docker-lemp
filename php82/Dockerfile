@@ -134,6 +134,10 @@ RUN ln -s ~/.config/composer/vendor/bin/phpmd /usr/local/bin
 RUN composer global require "phpunit/phpunit=*"
 RUN ln -s ~/.config/composer/vendor/bin/phpunit /usr/local/bin
 
+#Install yq
+RUN wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+RUN chmod +x /usr/local/bin/yq
+
 # Magerun for Magento users
 RUN wget https://files.magerun.net/n98-magerun2.phar \
     && chmod +x ./n98-magerun2.phar \
