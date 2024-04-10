@@ -23,6 +23,7 @@ MYSQL_HOST=mysql
 MYSQL_USER=root
 MYSQL_PASSWORD=root
 
+SEARCH_ENGINE=opensearch
 OPENSEARCH_HOSTNAME='opensearch'
 OPENSEARCH_PREFIX=$(echo $HOST | sed -e "s/\.//g")
 
@@ -235,8 +236,11 @@ installM2() {
      --base-url-secure=${MAGENTO_BASE_URL_SECURE}  \
      --use-secure-admin=${MAGENTO_USE_SECURE_ADMIN} \
      --use-rewrites=1 \
+     --search-engine=${SEARCH_ENGINE} \
      --opensearch-host=${OPENSEARCH_HOSTNAME} \
      --opensearch-index-prefix=${OPENSEARCH_PREFIX} \
+     --lock-provider=file \
+     --lock-file-path=/var/www/${HOST}/var/lock/ \
      --admin-firstname=${MAGENTO_ADMIN_FIRSTNAME} \
      --admin-lastname=${MAGENTO_ADMIN_LASTNAME} \
      --admin-email=${MAGENTO_ADMIN_EMAIL} \
@@ -248,8 +252,6 @@ installM2() {
     yes | bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=redis --cache-backend-redis-db=1
     yes | bin/magento setup:config:set --page-cache=redis --page-cache-redis-server=redis --page-cache-redis-db=2
     yes | bin/magento setup:config:set --session-save=redis --session-save-redis-host=redis --session-save-redis-log-level=4 --session-save-redis-db=3
-
-    yes | bin/magento setup:config:set --lock-provider=file --lock-file-path=/var/www/${HOST}/var/lock/
 
     #Disable unused modules
     bin/magento module:disable Magento_Marketplace
