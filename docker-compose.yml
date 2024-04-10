@@ -112,6 +112,33 @@ services:
       options:
         max-size: "10m"
 
+  php83-fpm:
+    build:
+      context: php83
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+        - NODE_MAJOR=20
+    container_name: lemp-php83
+    working_dir: /var/www
+    volumes:
+      - ./var/log/php83/:/var/log/php83/
+      - ./var/www:/var/www
+      - ./php83/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
+      - COMPOSER_PROCESS_TIMEOUT=600
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+
   mysql:
     image: mysql:8.0
     container_name: lemp-mysql
