@@ -44,7 +44,7 @@ RUN apt-get update \
     apt-utils
 
 RUN docker-php-ext-configure \
-  	gd --with-freetype --with-jpeg;
+  	gd --with-freetype --with-jpeg --with-webp;
 
 RUN docker-php-ext-install bcmath \
     calendar \
