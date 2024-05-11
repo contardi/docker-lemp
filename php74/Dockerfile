@@ -44,9 +44,6 @@ RUN apt-get update \
     python \
     apt-utils
 
-RUN docker-php-ext-configure \
-  	gd --with-freetype --with-jpeg --with-webp;
-
 RUN docker-php-ext-install bcmath \
     calendar \
     curl \
@@ -65,6 +62,12 @@ RUN docker-php-ext-install bcmath \
     xmlrpc \
     xsl \
     zip
+
+
+RUN docker-php-ext-configure gd \
+    --with-jpeg \
+    --with-freetype \
+    --with-webp;
 
 # PHP XDebug - 2.9.8 because of Magento
 RUN pecl install xdebug-2.9.8 \

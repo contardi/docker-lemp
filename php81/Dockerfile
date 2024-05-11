@@ -42,11 +42,6 @@ RUN apt-get update \
     zip \
     apt-utils
 
-RUN docker-php-ext-configure gd \
-            --with-jpeg \
-            --with-freetype \
-            --with-webp;
-
 RUN docker-php-ext-install bcmath \
     calendar \
     curl \
@@ -62,6 +57,12 @@ RUN docker-php-ext-install bcmath \
     xml \
     xsl \
     zip
+
+
+RUN docker-php-ext-configure gd \
+    --with-jpeg \
+    --with-freetype \
+    --with-webp;
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
