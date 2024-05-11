@@ -29,6 +29,7 @@ RUN apt-get update \
     libmemcached-dev \
     libsodium-dev \
     libzip-dev \
+    libwebp-dev \
     golang-go \
     wget \
     git \
