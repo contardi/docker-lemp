@@ -14,6 +14,7 @@ RUN apt-get update \
     autoconf \
     g++ \
     libcurl4-openssl-dev \
+    libjpeg-dev \
     libpng-dev \
     openssl \
     libxml2-dev \
@@ -67,8 +68,8 @@ RUN docker-php-ext-configure gd \
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
 # PHP XDebug
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+RUN pecl install xdebug 
+RUN docker-php-ext-enable xdebug
 
 RUN echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
@@ -80,24 +81,24 @@ RUN echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/docker-php-ex
     && echo "xdebug.client_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # PHP Imagick
-RUN pecl install -f imagick \
-    && docker-php-ext-enable imagick
+RUN pecl install -f imagick
+RUN docker-php-ext-enable imagick
 
 # PHP Memcache
-RUN pecl install -f memcached \
-    && docker-php-ext-enable memcached
+RUN pecl install -f memcached
+RUN docker-php-ext-enable memcached
 
 # PHP MongoDB
-RUN pecl install -f mongodb \
-    && docker-php-ext-enable mongodb
+RUN pecl install -f mongodb 
+RUN docker-php-ext-enable mongodb
 
 # PHP OAuth
 RUN pecl install -f oauth \
  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # PHP Redis
-RUN pecl install -f redis \
-	&& docker-php-ext-enable redis
+RUN pecl install -f redis 
+RUN docker-php-ext-enable redis
 
 # PDO PGSql
 RUN apt-get install -y libpq-dev \

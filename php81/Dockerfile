@@ -14,6 +14,7 @@ RUN apt-get update \
     g++ \
     libtool \
     libcurl4-openssl-dev \
+    libjpeg-dev \
     libpng-dev \
     openssl \
     libxml2-dev \
@@ -80,8 +81,8 @@ RUN echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/docker-php-ex
     && echo "xdebug.client_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # PHP Imagick
-RUN pecl install -f imagick \
-    && docker-php-ext-enable imagick
+RUN pecl install -f imagick
+RUN docker-php-ext-enable imagick
 
 # PHP Memcache
 RUN pecl install -f memcached \

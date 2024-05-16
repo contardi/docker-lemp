@@ -14,6 +14,7 @@ RUN apt-get update \
     autoconf \
     g++ \
     libtool \
+    libjpeg-dev \
     libpng-dev \
     libcurl4-openssl-dev \
     openssl \
@@ -82,8 +83,8 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     && echo "xdebug.remote_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # PHP Imagick
-RUN pecl install -f imagick \
-    && docker-php-ext-enable imagick
+RUN pecl install -f imagick
+RUN docker-php-ext-enable imagick
 
 # PHP MCrypt
 RUN pecl install -f mcrypt-1.0.1 \
