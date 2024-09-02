@@ -27,6 +27,8 @@ SEARCH_ENGINE=opensearch
 OPENSEARCH_HOSTNAME='opensearch'
 OPENSEARCH_PREFIX=$(echo $HOST | sed -e "s/\.//g")
 
+PHP_VERSION=php82
+
 createDir() {
   echo "Verifying ${DIR}..."
   if [ ! -d "${DIR}" ]; then
@@ -148,7 +150,7 @@ updateStore() {
   echo "Update store"
   cd ${BASEDIR} || echo "Directory not found"
 
-  docker compose exec -T --user www-data php81-fpm /bin/bash -c "
+  docker compose exec -T --user www-data $PHP_VERSION-fpm /bin/bash -c "
   cd /var/www/${HOST}/
   composer update && \
   bin/magento maintenance:enable && \
@@ -166,7 +168,7 @@ updateStore() {
 updateGit() {
   echo "Update store"
   cd ${BASEDIR} || echo "Directory not found"
-  docker compose exec -T --user www-data php81-fpm /bin/bash -c "
+  docker compose exec -T --user www-data $PHP_VERSION-fpm /bin/bash -c "
   cd /var/www/${HOST}/
 
 counter=0;
@@ -214,8 +216,8 @@ installM2() {
     sudo chown -R www-data: ${DIR}/
 
     cd ${BASEDIR} || echo "Directory not found"
-    docker compose exec -T php81-fpm /bin/bash -c "chown -R www-data: /var/www/"
-    docker compose exec -T --user www-data php81-fpm /bin/bash -c "
+    docker compose exec -T ${PHP_VERSION}-fpm /bin/bash -c "chown -R www-data: /var/www/"
+    docker compose exec -T --user www-data ${PHP_VERSION}-fpm /bin/bash -c "
     cd /var/www/${HOST}/
 
     composer clearcache

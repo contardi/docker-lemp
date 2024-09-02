@@ -21,6 +21,6 @@ fi
 HOST=$1
 
 echo "Cleaning processed $HOST"
-docker compose exec -T --user www-data php81-fpm /bin/bash -c "cd /var/www/$HOST && rm -rf var/view_preprocessed/ pub/static/* && bin/magento c:c && bin/magento c:f"
+docker compose exec -T --user www-data php82-fpm /bin/bash -c "cd /var/www/$HOST && rm -rf var/view_preprocessed/ pub/static/* && bin/magento c:c && bin/magento c:f"
 
 echo "$HOST - processed cleared"
