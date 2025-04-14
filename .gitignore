@@ -6,9 +6,11 @@
 /shell/utils/
 /var/postgres/
 /var/node/app
+/var/node/apps
 !/var/node/app/index.js
 /var/www/*
 /nginx/conf.d/*.conf
+/nginx/conf.d/*.bkp
 !/nginx/conf.d/magento2-nginx.conf
 /nginx/certificates/*
 /ssh-keys/*

@@ -33,7 +33,7 @@ services:
 
   php74-fpm:
     build:
-      context: php74
+      context: php/php74
       args:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
@@ -44,7 +44,7 @@ services:
     volumes:
       - ./var/log/php74/:/var/log/php74/
       - ./var/www:/var/www
-      - ./php74/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php/php74/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
@@ -60,7 +60,7 @@ services:
 
   php81-fpm:
     build:
-      context: php81
+      context: php/php81
       args:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
@@ -71,7 +71,7 @@ services:
     volumes:
       - ./var/log/php81/:/var/log/php81/
       - ./var/www:/var/www
-      - ./php81/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php/php81/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
@@ -87,7 +87,7 @@ services:
 
   php82-fpm:
     build:
-      context: php82
+      context: php/php82
       args:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
@@ -98,7 +98,7 @@ services:
     volumes:
       - ./var/log/php82/:/var/log/php82/
       - ./var/www:/var/www
-      - ./php82/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php/php82/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
@@ -114,7 +114,7 @@ services:
 
   php83-fpm:
     build:
-      context: php83
+      context: php/php83
       args:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
@@ -125,7 +125,34 @@ services:
     volumes:
       - ./var/log/php83/:/var/log/php83/
       - ./var/www:/var/www
-      - ./php83/config/php.ini:/usr/local/etc/php/php.ini
+      - ./php/php83/config/php.ini:/usr/local/etc/php/php.ini
+      - ./ssh-keys:/var/www/.ssh/
+    env_file:
+      - .env
+    environment:
+      - TERM=xterm
+      - PHP_IDE_CONFIG=serverName=PHP
+      - COMPOSER_MEMORY_LIMIT=-1
+      - COMPOSER_PROCESS_TIMEOUT=600
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+
+  php84-fpm:
+    build:
+      context: php/php84
+      args:
+        - USERGID=${USERGID}
+        - USERUID=${USERUID}
+        - USERNAME=${USERNAME}
+        - NODE_MAJOR=20
+    container_name: lemp-php84
+    working_dir: /var/www
+    volumes:
+      - ./var/log/php84/:/var/log/php84/
+      - ./var/www:/var/www
+      - ./php/php84/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     env_file:
       - .env
