@@ -14,6 +14,7 @@ RUN apt-get update \
     autoconf \
     g++ \
     libcurl4-openssl-dev \
+    libfreetype6-dev \
     libjpeg-dev \
     libpng-dev \
     openssl \
@@ -47,7 +48,6 @@ RUN apt-get update \
 RUN docker-php-ext-install bcmath \
     calendar \
     curl \
-    gd \
     intl \
     mysqli \
     opcache \
@@ -64,6 +64,8 @@ RUN docker-php-ext-configure gd \
     --with-jpeg \
     --with-freetype \
     --with-webp;
+
+RUN docker-php-ext-install gd;
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
@@ -87,10 +89,6 @@ RUN docker-php-ext-enable imagick
 # PHP Memcache
 RUN pecl install -f memcached
 RUN docker-php-ext-enable memcached
-
-# PHP MongoDB
-RUN pecl install -f mongodb 
-RUN docker-php-ext-enable mongodb
 
 # PHP OAuth
 RUN pecl install -f oauth \

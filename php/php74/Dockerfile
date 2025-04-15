@@ -14,6 +14,7 @@ RUN apt-get update \
     autoconf \
     g++ \
     libtool \
+    libfreetype6-dev \
     libjpeg-dev \
     libpng-dev \
     libcurl4-openssl-dev \
@@ -48,7 +49,6 @@ RUN apt-get update \
 RUN docker-php-ext-install bcmath \
     calendar \
     curl \
-    gd \
     intl \
     mysqli \
     opcache \
@@ -69,6 +69,8 @@ RUN docker-php-ext-configure gd \
     --with-jpeg \
     --with-freetype \
     --with-webp;
+
+RUN docker-php-ext-install gd;
 
 # PHP XDebug - 2.9.8 because of Magento
 RUN pecl install xdebug-2.9.8 \
@@ -93,10 +95,6 @@ RUN pecl install -f mcrypt-1.0.1 \
 # PHP Memcache
 RUN pecl install -f memcached \
     && docker-php-ext-enable memcached
-
-# PHP MongoDB
-RUN pecl install -f mongodb \
-    && docker-php-ext-enable mongodb
 
 # PHP OAuth
 RUN pecl install -f oauth \
