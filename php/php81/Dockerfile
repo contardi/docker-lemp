@@ -147,12 +147,15 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
     && chmod +x ./n98-magerun2.phar \
     && mv ./n98-magerun2.phar /usr/local/bin/n98-magerun2
 
-# Mailhog to send email
-ENV GOPATH=/opt/go
-ENV GO111MODULE=on
-RUN mkdir /opt/go
-RUN go install github.com/mailhog/mhsendmail@latest \
-    && echo "sendmail_path=\"/opt/go/bin/mhsendmail --smtp-addr='mailhog:1025'\"" > /usr/local/etc/php/conf.d/docker-php-ext-mailhog.ini
+# Install msmtp for sending emails via Mailpit
+RUN apt-get install -y msmtp
+
+# Copy the msmtp configuration file into the container
+COPY config/msmtprc /etc/msmtprc
+RUN chmod 600 /etc/msmtprc
+
+# Set PHP to use msmtp as sendmail
+RUN echo "sendmail_path = '/usr/bin/msmtp -t'" > /usr/local/etc/php/conf.d/sendmail.ini
 
 # 775 and 664 folder permissions
 RUN echo "umask 0002" >> /etc/bash.bashrc

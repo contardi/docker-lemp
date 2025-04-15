@@ -14,6 +14,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   varnish:
     image: varnish:7.0
@@ -30,6 +32,8 @@ services:
     environment:
       - VARNISH_SIZE=2G
       - CACHE_SIZE=256M
+    networks:
+      - lemp
 
   php74-fpm:
     build:
@@ -57,6 +61,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   php81-fpm:
     build:
@@ -65,7 +71,7 @@ services:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-        - NODE_MAJOR=18
+        - NODE_MAJOR=20
     container_name: lemp-php81
     working_dir: /var/www
     volumes:
@@ -84,6 +90,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   php82-fpm:
     build:
@@ -111,6 +119,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   php83-fpm:
     build:
@@ -138,6 +148,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   php84-fpm:
     build:
@@ -165,6 +177,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   mysql:
     image: mysql:8.0
@@ -182,6 +196,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -198,6 +214,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   sonarqube:
     image: sonarqube:latest
@@ -229,6 +247,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   opensearch:
     build:
@@ -249,6 +269,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   opensearch1:
     build:
@@ -269,6 +291,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:latest
@@ -284,6 +308,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   rabbitmq:
     image: rabbitmq:management
@@ -302,6 +328,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   node:
     build:
@@ -325,6 +353,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   mongodb:
     image: mongo:latest
@@ -341,16 +371,24 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: lemp-mailhog
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: lemp-mailpit
     ports:
       - "8025:8025"
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
 
   postgres:
     image: postgres
@@ -368,3 +406,8 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
+    networks:
+      - lemp
+
+networks:
+  lemp:

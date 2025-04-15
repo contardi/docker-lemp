@@ -16,7 +16,7 @@ Don't forget to change the .env to your current user
 * MySQL 8.0
 * PHPMyAdmin
 * Mongo
-* Mailhog
+* MailpIt
 * Redis
 * OpenSearch
 * RabbitMQ
@@ -29,7 +29,7 @@ To change default variables, edit `.env`  file
 **Nginx:** http://localhost/ - Folder var/www/  
 **Node:** http://localhost:3000/ Folder var/app    
 **PHPMyAdmin:** http://localhost:8000/  
-**Mailhog:** http://localhost:8025/  
+**MailpIt:** http://localhost:8025/  
 **OpenSearch Dashoboards (Kibana)** http://localhost:5601/  
 **SonarQube:** http://localhost:9999/ | admin:admin  
 **RabbitMQ:** http://localhost:15672/ | rabbitmq:rabbitmq  
