@@ -3,9 +3,9 @@
 if [ $# -eq 0 ]; then
     echo "Create Mkcert Script
 Usage
-$ shell/create-ssl.sh {hostname}
+$ bin/create-ssl.sh {hostname}
 
-e.g. shell/create-ssl.sh biz4.local"
+e.g. bin/create-ssl.sh biz4.local"
     exit 0
 fi
 

@@ -44,11 +44,11 @@ RUN apt-get update \
     zip \
     apt-utils
 
-
 RUN docker-php-ext-install bcmath \
     calendar \
     curl \
     intl \
+    ftp \
     mysqli \
     opcache \
     pdo_mysql \

@@ -15,14 +15,14 @@ if [ $# -eq 0 ]; then
   exit 0
 fi
 
-if [ ${0} != "shell/remove-site.sh" ]; then
+if [ ${0} != "bin/remove-site.sh" ]; then
   echo "You must run the script in the lemp folder"
   exit 0
 fi
 
 PARAM=$1
 STORE=$(echo ${PARAM} | sed -e "s/\.local//g")
-BASEDIR=$(echo ${PWD} | sed -e "s/shell//g")
+BASEDIR=$(echo ${PWD} | sed -e "s/bin//g")
 DIR="${BASEDIR}/var/www/${STORE}.local"
 
 echo "Verifying ${DIR}..."

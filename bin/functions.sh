@@ -4,7 +4,7 @@ CURRENTDIR=$(dirname "$0")
 source $CURRENTDIR/.env
 
 HOST=$1
-BASEDIR=$(echo ${PWD} | sed -e "s/shell//g")
+BASEDIR=$(echo ${PWD} | sed -e "s/bin//g")
 DIR="${BASEDIR}/var/www/$HOST"
 
 COMPOSER_HOME=/var/www/.composer

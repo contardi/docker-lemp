@@ -8,7 +8,7 @@ source $CURRENTDIR/functions.sh
 usage() {
   echo "Store importer M2 v 2.0
   Usage
-  $ shell/m2-create-empty.sh {site-name}
+  $ bin/m2-create-empty.sh {site-name}
    * site-name: name of the store in m2.local server, e.g. m2.local
   "
 }
@@ -18,7 +18,7 @@ if [ $# -eq 0 ]; then
   exit 0
 fi
 
-if [ ${0} != "shell/m2-create-empty.sh" ]; then
+if [ ${0} != "bin/m2-create-empty.sh" ]; then
   echo "You must run the script in the lemp folder"
   exit 0
 fi

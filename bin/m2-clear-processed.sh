@@ -3,7 +3,7 @@
 usage() {
   echo "Store importer M2 v 2.0
   Usage
-  $ shell/m2-clear-processed.sh {destination}
+  $ bin/m2-clear-processed.sh {destination}
    * destination: folder and host to be cleared, e.g. magento2.local
   "
 }
@@ -13,7 +13,7 @@ if [ $# -eq 0 ]; then
   exit 0
 fi
 
-if [ ${0} != "shell/m2-clear-processed.sh" ]; then
+if [ ${0} != "bin/m2-clear-processed.sh" ]; then
   echo "You must run the script in the lemp folder"
   exit 0
 fi
