@@ -27,7 +27,7 @@ SEARCH_ENGINE=opensearch
 OPENSEARCH_HOSTNAME='opensearch'
 OPENSEARCH_PREFIX=$(echo $HOST | sed -e "s/\.//g")
 
-PHP_VERSION=php82
+PHP_VERSION=php83
 
 createDir() {
   echo "Verifying ${DIR}..."
