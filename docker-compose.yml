@@ -51,7 +51,7 @@ services:
       - ./php/php74/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     ports:
-      - "9003:9003"
+      - "9074:9003"
     env_file:
       - .env
     environment:
@@ -82,7 +82,7 @@ services:
       - ./php/php81/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     ports:
-      - "9003:9003"
+      - "9081:9003"
     env_file:
       - .env
     environment:
@@ -113,7 +113,7 @@ services:
       - ./php/php82/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     ports:
-      - "9003:9003"
+      - "9082:9003"
     env_file:
       - .env
     environment:
@@ -144,7 +144,7 @@ services:
       - ./php/php83/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     ports:
-      - "9003:9003"
+      - "9083:9003"
     env_file:
       - .env
     environment:
@@ -175,7 +175,7 @@ services:
       - ./php/php84/config/php.ini:/usr/local/etc/php/php.ini
       - ./ssh-keys:/var/www/.ssh/
     ports:
-      - "9003:9003"
+      - "9084:9003"
     env_file:
       - .env
     environment:
