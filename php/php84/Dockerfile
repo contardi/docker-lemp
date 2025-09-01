@@ -15,6 +15,7 @@ RUN apt-get install -y vim \
     libjpeg-dev \
     libpng-dev \
     libfreetype6-dev \
+    libwebp-dev \
     openssl \
     libxml2-dev \
     musl \
@@ -56,6 +57,14 @@ RUN docker-php-ext-install zip
 #intl
 RUN docker-php-ext-configure intl && docker-php-ext-install intl;
 
+#GD
+RUN apt-get install -y libfreetype-dev libjpeg62-turbo-dev libpng-dev
+
+RUN docker-php-ext-configure gd \
+      --with-freetype \
+      --with-jpeg \
+      --with-webp \
+    && docker-php-ext-install -j"$(nproc)" gd
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
