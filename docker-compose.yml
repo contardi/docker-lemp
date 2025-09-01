@@ -42,7 +42,6 @@ services:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-        - NODE_MAJOR=18
     container_name: lemp-php82
     working_dir: /var/www
     volumes:
@@ -73,7 +72,6 @@ services:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-        - NODE_MAJOR=20
     container_name: lemp-php83
     working_dir: /var/www
     volumes:
@@ -104,7 +102,6 @@ services:
         - USERGID=${USERGID}
         - USERUID=${USERUID}
         - USERNAME=${USERNAME}
-        - NODE_MAJOR=20
     container_name: lemp-php84
     working_dir: /var/www
     volumes:

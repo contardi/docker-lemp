@@ -3,11 +3,9 @@ FROM php:8.3-fpm
 ARG USERGID
 ARG USERUID
 ARG USERNAME
-ARG NODE_MAJOR
 
 RUN apt-get update
-RUN apt-get install -y imagemagick \
-    vim \
+RUN apt-get install -y vim \
     libtool \
     curl \
     libmcrypt-dev \
@@ -25,12 +23,15 @@ RUN apt-get install -y imagemagick \
     git \
     sudo \
     bash-completion \
+    imagemagick \
+    libmagickwand-dev \
     cron \
     gnupg \
     rsync \
     zip \
     apt-utils \
     libsodium-dev
+
 
 
 RUN docker-php-ext-install bcmath
@@ -56,9 +57,9 @@ RUN apk add git --update --no-cache && \
     phpize && \
     ./configure && \
     make && \
-    make install && \
-    apk del git && \
-    docker-php-ext-enable imagick
+    make install
+
+RUN docker-php-ext-enable imagick
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
@@ -160,6 +161,9 @@ RUN cd /var/www \
 RUN rm -rf /tmp/*
 
 EXPOSE 9000
+
+USER www-data
+
 CMD ["php-fpm"]
 
 

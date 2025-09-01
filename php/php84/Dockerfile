@@ -3,11 +3,9 @@ FROM php:8.4-fpm
 ARG USERGID
 ARG USERUID
 ARG USERNAME
-ARG NODE_MAJOR
 
 RUN apt-get update
-RUN apt-get install -y imagemagick \
-    vim \
+RUN apt-get install -y vim \
     libtool \
     curl \
     libmcrypt-dev \
@@ -25,6 +23,8 @@ RUN apt-get install -y imagemagick \
     git \
     sudo \
     bash-completion \
+    imagemagick \
+    libmagickwand-dev \
     cron \
     gnupg \
     rsync \
@@ -47,18 +47,6 @@ RUN docker-php-ext-install sodium
 RUN docker-php-ext-install xml 
 RUN docker-php-ext-install gd;
 
-RUN apk add git --update --no-cache && \
-    git clone https://github.com/Imagick/imagick.git --depth 1 /tmp/imagick && \
-    cd /tmp/imagick && \
-    git fetch origin master && \
-    git switch master && \
-    cd /tmp/imagick && \
-    phpize && \
-    ./configure && \
-    make && \
-    make install && \
-    apk del git && \
-    docker-php-ext-enable imagick
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 

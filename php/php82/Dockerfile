@@ -3,11 +3,9 @@ FROM php:8.2-fpm
 ARG USERGID
 ARG USERUID
 ARG USERNAME
-ARG NODE_MAJOR
 
 RUN apt-get update
-RUN apt-get install -y imagemagick \
-    vim \
+RUN apt-get install -y vim \
     libtool \
     curl \
     libmcrypt-dev \
@@ -25,6 +23,8 @@ RUN apt-get install -y imagemagick \
     git \
     sudo \
     bash-completion \
+    imagemagick \
+    libmagickwand-dev \
     cron \
     gnupg \
     rsync \
@@ -45,7 +45,7 @@ RUN docker-php-ext-install simplexml
 RUN docker-php-ext-install soap 
 RUN docker-php-ext-install sodium 
 RUN docker-php-ext-install xml 
-RUN docker-php-ext-install gd;RUN docker-php-ext-install gd;
+RUN docker-php-ext-install gd;
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
@@ -165,6 +165,9 @@ RUN cd /var/www \
 RUN rm -rf /tmp/*
 
 EXPOSE 9000
+
+USER www-data
+
 CMD ["php-fpm"]
 
 
