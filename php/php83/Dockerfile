@@ -48,19 +48,6 @@ RUN docker-php-ext-install sodium
 RUN docker-php-ext-install xml 
 RUN docker-php-ext-install gd;
 
-RUN apk add git --update --no-cache && \
-    git clone https://github.com/Imagick/imagick.git --depth 1 /tmp/imagick && \
-    cd /tmp/imagick && \
-    git fetch origin master && \
-    git switch master && \
-    cd /tmp/imagick && \
-    phpize && \
-    ./configure && \
-    make && \
-    make install
-
-RUN docker-php-ext-enable imagick
-
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
 # PHP XDebug
@@ -88,10 +75,6 @@ RUN docker-php-ext-enable redis
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
-
-# Node
-RUN mkdir -p /etc/apt/keyrings
-RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
