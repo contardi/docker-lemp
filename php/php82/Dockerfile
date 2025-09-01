@@ -28,9 +28,12 @@ RUN apt-get install -y vim \
     cron \
     gnupg \
     rsync \
+    libzip-dev \
     zip \
     apt-utils \
-    libsodium-dev
+    libsodium-dev \
+    libicu-dev \
+    libxslt-dev 
 
 
 RUN docker-php-ext-install bcmath
@@ -46,6 +49,12 @@ RUN docker-php-ext-install soap
 RUN docker-php-ext-install sodium 
 RUN docker-php-ext-install xml 
 RUN docker-php-ext-install gd;
+RUN docker-php-ext-install intl;
+RUN docker-php-ext-install xsl;
+RUN docker-php-ext-install zip
+
+#intl
+RUN docker-php-ext-configure intl && docker-php-ext-install intl;
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
