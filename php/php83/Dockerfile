@@ -5,67 +5,60 @@ ARG USERUID
 ARG USERNAME
 ARG NODE_MAJOR
 
-RUN apt-get update \
-    && apt-get install -y imagemagick \
+RUN apt-get update
+RUN apt-get install -y imagemagick \
     vim \
     libtool \
     curl \
     libmcrypt-dev \
     autoconf \
-    g++ \
+    g++ \ 
     libcurl4-openssl-dev \
-    libfreetype6-dev \
     libjpeg-dev \
     libpng-dev \
+    libfreetype6-dev \
     openssl \
     libxml2-dev \
     musl \
     make \
-    libpcre3 \
-    iproute2 \
-    libc-client-dev \
-    libpcre3-dev \
-    libxslt1-dev \
-    libmagickwand-dev \
-    libmagickcore-dev \
-    libmemcached-dev \
-    libsodium-dev \
-    libzip-dev \
-    libwebp-dev \
-    golang-go \
     wget \
     git \
-    software-properties-common \
     sudo \
     bash-completion \
     cron \
     gnupg \
     rsync \
     zip \
-    apt-utils
+    apt-utils \
+    libsodium-dev
 
-RUN docker-php-ext-install bcmath \
-    calendar \
-    curl \
-    intl \
-    ftp \
-    mysqli \
-    opcache \
-    pdo_mysql \
-    pcntl \
-    simplexml \
-    soap \
-    sodium \
-    xml \
-    xsl \
-    zip
 
-RUN docker-php-ext-configure gd \
-    --with-jpeg \
-    --with-freetype \
-    --with-webp;
-
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install calendar
+RUN docker-php-ext-install curl 
+RUN docker-php-ext-install ftp 
+RUN docker-php-ext-install mysqli 
+RUN docker-php-ext-install opcache 
+RUN docker-php-ext-install pdo_mysql 
+RUN docker-php-ext-install pcntl 
+RUN docker-php-ext-install simplexml 
+RUN docker-php-ext-install soap 
+RUN docker-php-ext-install sodium 
+RUN docker-php-ext-install xml 
 RUN docker-php-ext-install gd;
+
+RUN apk add git --update --no-cache && \
+    git clone https://github.com/Imagick/imagick.git --depth 1 /tmp/imagick && \
+    cd /tmp/imagick && \
+    git fetch origin master && \
+    git switch master && \
+    cd /tmp/imagick && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install && \
+    apk del git && \
+    docker-php-ext-enable imagick
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
@@ -81,14 +74,6 @@ RUN echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/docker-php-ex
     && echo "xdebug.discover_client_host=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.idekey=PHP" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.client_host="`/sbin/ip route|awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-# PHP Imagick
-RUN pecl install -f imagick
-RUN docker-php-ext-enable imagick
-
-# PHP Memcache
-RUN pecl install -f memcached
-RUN docker-php-ext-enable memcached
 
 # PHP OAuth
 RUN pecl install -f oauth \
@@ -106,16 +91,6 @@ RUN apt-get install -y libpq-dev \
 # Node
 RUN mkdir -p /etc/apt/keyrings
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-
-RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
-RUN apt-get update
-RUN apt-get install nodejs -y
-
-#Yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update \
-    && apt-get install -y yarn
 
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1

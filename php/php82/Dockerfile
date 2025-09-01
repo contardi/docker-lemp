@@ -5,67 +5,47 @@ ARG USERUID
 ARG USERNAME
 ARG NODE_MAJOR
 
-RUN apt-get update \
-    && apt-get install -y imagemagick \
+RUN apt-get update
+RUN apt-get install -y imagemagick \
     vim \
     libtool \
     curl \
     libmcrypt-dev \
     autoconf \
-    g++ \
+    g++ \ 
     libcurl4-openssl-dev \
-    libfreetype6-dev \
     libjpeg-dev \
     libpng-dev \
+    libfreetype6-dev \
     openssl \
     libxml2-dev \
     musl \
     make \
-    libpcre3 \
-    iproute2 \
-    libc-client-dev \
-    libpcre3-dev \
-    libxslt1-dev \
-    libmagickwand-dev \
-    libmagickcore-dev \
-    libmemcached-dev \
-    libsodium-dev \
-    libzip-dev \
-    libwebp-dev \
-    golang-go \
     wget \
     git \
-    software-properties-common \
     sudo \
     bash-completion \
     cron \
     gnupg \
     rsync \
     zip \
-    apt-utils
-
-RUN docker-php-ext-install bcmath \
-    calendar \
-    curl \
-    intl \
-    mysqli \
-    opcache \
-    pdo_mysql \
-    pcntl \
-    simplexml \
-    soap \
-    sodium \
-    xml \
-    xsl \
-    zip
+    apt-utils \
+    libsodium-dev
 
 
-RUN docker-php-ext-configure gd \
-    --with-jpeg \
-    --with-freetype \
-    --with-webp;
-
-RUN docker-php-ext-install gd;
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install calendar
+RUN docker-php-ext-install curl 
+RUN docker-php-ext-install ftp 
+RUN docker-php-ext-install mysqli 
+RUN docker-php-ext-install opcache 
+RUN docker-php-ext-install pdo_mysql 
+RUN docker-php-ext-install pcntl 
+RUN docker-php-ext-install simplexml 
+RUN docker-php-ext-install soap 
+RUN docker-php-ext-install sodium 
+RUN docker-php-ext-install xml 
+RUN docker-php-ext-install gd;RUN docker-php-ext-install gd;
 
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install sockets
 
