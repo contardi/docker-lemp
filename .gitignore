@@ -12,3 +12,4 @@
 !/nginx/conf.d/magento2-nginx.conf
 /nginx/certificates/*
 /ssh-keys/*
+/shell
